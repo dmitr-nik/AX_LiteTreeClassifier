@@ -1,0 +1,3412 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: DBT
+
+; Microsoft Dynamics AX Table : ltcFormDatasource unloaded
+; --------------------------------------------------------------------------------
+  TABLEVERSION 1
+  
+  TABLE #ltcFormDatasource
+    Id 50297
+    PROPERTIES
+      Name                #ltcFormDatasource
+    ENDPROPERTIES
+    
+    FIELDS
+      FIELD #FormName
+        Id 50001
+        STRING
+        PROPERTIES
+          Name                #FormName
+          Table               #ltcFormDatasource
+          ExtendedDataType    
+            ARRAY 
+              #FormName
+              #
+            ENDARRAY
+          StringSize          #40
+        ENDPROPERTIES
+        
+      FIELD #DataSourceName
+        Id 50002
+        STRING
+        PROPERTIES
+          Name                #DataSourceName
+          Table               #ltcFormDatasource
+          ExtendedDataType    
+            ARRAY 
+              #ltcFormDataSourceName
+              #
+            ENDARRAY
+          StringSize          #40
+        ENDPROPERTIES
+        
+      FIELD #RefTableId
+        Id 50003
+        INT
+        PROPERTIES
+          Name                #RefTableId
+          Table               #ltcFormDatasource
+          ExtendedDataType    
+            ARRAY 
+              #RefTableId
+              #
+            ENDARRAY
+        ENDPROPERTIES
+        
+    ENDFIELDS
+    GROUPS
+    ENDGROUPS
+    
+    INDICES
+    ENDINDICES
+    REFERENCES
+    ENDREFERENCES
+    
+    DELETEACTIONS
+    ENDDELETEACTIONS
+    
+    METHODS
+      Version: 3
+      SOURCE #createStructure
+        #static void createStructure(FormName _formName)
+        #{
+        #    ltcFormDatasource   ltcFormDatasource;
+        #    TreeNode            treeNode;
+        #    ;
+        #    treeNode = infolog.rootNode();
+        #    treeNode.AOTfindChild("Forms");
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDTABLE
+  
+
+***Element: DBT
+
+; Microsoft Dynamics AX Table : ltcConfTable unloaded
+; --------------------------------------------------------------------------------
+  TABLEVERSION 1
+  
+  TABLE #ltcConfTable
+    Id 50260
+    PROPERTIES
+      Name                #ltcConfTable
+      TableGroup          #Group
+      PrimaryIndex        #MainIdx
+    ENDPROPERTIES
+    
+    FIELDS
+      FIELD #ConfId
+        Id 50001
+        STRING
+        PROPERTIES
+          Name                #ConfId
+          Table               #ltcConfTable
+          ExtendedDataType    
+            ARRAY 
+              #ltcTreeConfId
+              #
+            ENDARRAY
+        ENDPROPERTIES
+        
+      FIELD #ConfName
+        Id 50002
+        STRING
+        PROPERTIES
+          Name                #ConfName
+          Table               #ltcConfTable
+          ExtendedDataType    
+            ARRAY 
+              #Description
+              #
+            ENDARRAY
+          StringSize          #60
+        ENDPROPERTIES
+        
+      FIELD #RefTableId
+        Id 50003
+        INT
+        PROPERTIES
+          Name                #RefTableId
+          Table               #ltcConfTable
+          ExtendedDataType    
+            ARRAY 
+              #RefTableId
+              #
+            ENDARRAY
+        ENDPROPERTIES
+        
+    ENDFIELDS
+    GROUPS
+    ENDGROUPS
+    
+    INDICES
+      #MainIdx
+      Id 50001
+      PROPERTIES
+        Name                #MainIdx
+        AllowDuplicates     #No
+      ENDPROPERTIES
+      
+      INDEXFIELDS
+        #ConfId
+      ENDINDEXFIELDS
+      
+    ENDINDICES
+    REFERENCES
+    ENDREFERENCES
+    
+    DELETEACTIONS
+    ENDDELETEACTIONS
+    
+    METHODS
+      Version: 3
+      SOURCE #refTableName
+        #edit TableName refTableName(boolean _set, TableName _name)
+        #{
+        #    ;
+        #    if (_set)
+        #    {
+        #        this.RefTableId = tableName2Id(_name);
+        #    }
+        #
+        #    return tableId2Name(this.RefTableId);
+        #}
+      ENDSOURCE
+      SOURCE #find
+        #static ltcConfTable find(ltcTreeConfId _ConfId, boolean _forupdate = false)
+        #{
+        #    ltcConfTable ltcConfTable;
+        #    ;
+        #    if ( _ConfId)
+        #    {
+        #        ltcConfTable.selectForUpdate(_forupdate);
+        #        select firstonly ltcConfTable where
+        #            ltcConfTable.ConfId == _ConfId;
+        #    }
+        #    return ltcConfTable;
+        #}
+        #
+      ENDSOURCE
+    ENDMETHODS
+  ENDTABLE
+  
+
+***Element: DBT
+
+; Microsoft Dynamics AX Table : ltcConfLine unloaded
+; --------------------------------------------------------------------------------
+  TABLEVERSION 1
+  
+  TABLE #ltcConfLine
+    Id 50261
+    PROPERTIES
+      Name                #ltcConfLine
+      TableGroup          #Group
+      PrimaryIndex        #LineIdx
+      ClusterIndex        #LineIdx
+    ENDPROPERTIES
+    
+    FIELDS
+      FIELD #ConfId
+        Id 50001
+        STRING
+        PROPERTIES
+          Name                #ConfId
+          Table               #ltcConfLine
+          ExtendedDataType    
+            ARRAY 
+              #ltcTreeConfId
+              #
+            ENDARRAY
+        ENDPROPERTIES
+        
+      FIELD #TreeLevel
+        Id 50002
+        INT
+        PROPERTIES
+          Name                #TreeLevel
+          Table               #ltcConfLine
+          ExtendedDataType    
+            ARRAY 
+              #ltcTreeLevel
+              #
+            ENDARRAY
+        ENDPROPERTIES
+        
+      FIELD #RefTableId
+        Id 50003
+        INT
+        PROPERTIES
+          Name                #RefTableId
+          Table               #ltcConfLine
+          ExtendedDataType    
+            ARRAY 
+              #RefTableId
+              #
+            ENDARRAY
+        ENDPROPERTIES
+        
+      FIELD #FieldId
+        Id 50004
+        INT
+        PROPERTIES
+          Name                #FieldId
+          Table               #ltcConfLine
+          ExtendedDataType    
+            ARRAY 
+              #fieldId
+              #
+            ENDARRAY
+        ENDPROPERTIES
+        
+    ENDFIELDS
+    GROUPS
+    ENDGROUPS
+    
+    INDICES
+      #LineIdx
+      Id 50001
+      PROPERTIES
+        Name                #LineIdx
+        AllowDuplicates     #No
+      ENDPROPERTIES
+      
+      INDEXFIELDS
+        #ConfId
+        #TreeLevel
+      ENDINDEXFIELDS
+      
+    ENDINDICES
+    REFERENCES
+      REFERENCE #ltcConfTable
+        PROPERTIES
+          Name                #ltcConfTable
+          Table               #ltcConfTable
+        ENDPROPERTIES
+        
+        FIELDREFERENCES
+          REFERENCETYPE NORMAL
+          PROPERTIES
+            Field               #ConfId
+            RelatedField        #ConfId
+          ENDPROPERTIES
+          
+        ENDFIELDREFERENCES
+      ENDREFERENCE
+    ENDREFERENCES
+    
+    DELETEACTIONS
+    ENDDELETEACTIONS
+    
+    METHODS
+      Version: 3
+      SOURCE #confTable
+        #ltcConfTable confTable(boolean _forUpdate = false)
+        #{
+        #    ltcConfTable     confTable;
+        #    ;
+        #    conftable.selectForUpdate(_forUpdate);
+        #    select confTable
+        #        where confTable.ConfId == this.ConfId;
+        #
+        #    return confTable;
+        #}
+      ENDSOURCE
+      SOURCE #fieldName
+        #edit FieldName fieldName(boolean _set, FieldName _name)
+        #{
+        #    ;
+        #    if (_set)
+        #    {
+        #        this.FieldId = fieldName2Id(this.RefTableId, _name);
+        #    }
+        #
+        #    return fieldId2Name(this.RefTableId, this.FieldId);
+        #}
+      ENDSOURCE
+      SOURCE #initFromltcConfTable
+        #void initFromltcConfTable(ltcConfTable _confTable)
+        #{
+        #    ;
+        #    this.RefTableId =  _confTable.RefTableId;
+        #}
+      ENDSOURCE
+      SOURCE #refTableName
+        #edit TableName refTableName(boolean _set, TableName _name)
+        #{
+        #    ;
+        #    if (_set)
+        #    {
+        #        this.RefTableId = tableName2Id(_name);
+        #    }
+        #
+        #    return tableId2Name(this.RefTableId);
+        #}
+      ENDSOURCE
+      SOURCE #IsCanMultiSelect
+        #static boolean IsCanMultiSelect(ltcTreeConfId confId)
+        #{
+        #  // find records for selected configuration where array index > 1
+        #  // if exists then return false
+        #  return !( select firstonly recId from ltcConfLine
+        #            where ltcConfLine.ConfId == confId &&
+        #                  ltcConfLine.FieldId > 2<<16).recId;
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDTABLE
+  
+
+***Element: DBT
+
+; Microsoft Dynamics AX Table : ltcFormSetup unloaded
+; --------------------------------------------------------------------------------
+  TABLEVERSION 1
+  
+  TABLE #ltcFormSetup
+    Id 50254
+    PROPERTIES
+      Name                #ltcFormSetup
+      TableGroup          #Group
+      PrimaryIndex        #MainIdx
+    ENDPROPERTIES
+    
+    FIELDS
+      FIELD #FormName
+        Id 50001
+        STRING
+        PROPERTIES
+          Name                #FormName
+          Mandatory           #Yes
+          AllowEdit           #No
+          Table               #ltcFormSetup
+          ExtendedDataType    
+            ARRAY 
+              #FormName
+              #
+            ENDARRAY
+          StringSize          #40
+        ENDPROPERTIES
+        
+      FIELD #FormControlName
+        Id 50002
+        STRING
+        PROPERTIES
+          Name                #FormControlName
+          Label               #Контейнер
+          Table               #ltcFormSetup
+          ExtendedDataType    
+            ARRAY 
+              #FormControlName
+              #
+            ENDARRAY
+          StringSize          #250
+        ENDPROPERTIES
+        
+      FIELD #ltcTreeClassName
+        Id 50003
+        STRING
+        PROPERTIES
+          Name                #ltcTreeClassName
+          Table               #ltcFormSetup
+          ExtendedDataType    
+            ARRAY 
+              #ltcTreeClassName
+              #
+            ENDARRAY
+          StringSize          #40
+        ENDPROPERTIES
+        
+      FIELD #ltcFormDataSourceName
+        Id 50004
+        STRING
+        PROPERTIES
+          Name                #ltcFormDataSourceName
+          Table               #ltcFormSetup
+          ExtendedDataType    
+            ARRAY 
+              #ltcFormDataSourceName
+              #
+            ENDARRAY
+          StringSize          #40
+        ENDPROPERTIES
+        
+    ENDFIELDS
+    GROUPS
+    ENDGROUPS
+    
+    INDICES
+      #MainIdx
+      Id 50001
+      PROPERTIES
+        Name                #MainIdx
+        AllowDuplicates     #No
+      ENDPROPERTIES
+      
+      INDEXFIELDS
+        #FormName
+      ENDINDEXFIELDS
+      
+    ENDINDICES
+    REFERENCES
+    ENDREFERENCES
+    
+    DELETEACTIONS
+    ENDDELETEACTIONS
+    
+    METHODS
+      Version: 3
+      SOURCE #find
+        #static ltcFormSetup find(FormName _FormName, boolean _forupdate = false)
+        #{
+        #    ltcFormSetup ltcFormSetup;
+        #    ;
+        #    if ( _FormName)
+        #    {
+        #        ltcFormSetup.selectForUpdate(_forupdate);
+        #        select firstonly ltcFormSetup where
+        #            ltcFormSetup.FormName == _FormName;
+        #    }
+        #    return ltcFormSetup;
+        #}
+        #
+      ENDSOURCE
+    ENDMETHODS
+  ENDTABLE
+  
+
+***Element: DBT
+
+; Microsoft Dynamics AX Table : ltcAvailableTreeClasses unloaded
+; --------------------------------------------------------------------------------
+  TABLEVERSION 1
+  
+  TABLE #ltcAvailableTreeClasses
+    Id 50255
+    PROPERTIES
+      Name                #ltcAvailableTreeClasses
+      TableGroup          #Group
+      PrimaryIndex        #MainIdx
+    ENDPROPERTIES
+    
+    FIELDS
+      FIELD #ClassName
+        Id 50001
+        STRING
+        PROPERTIES
+          Name                #ClassName
+          Mandatory           #Yes
+          AllowEdit           #No
+          Table               #ltcAvailableTreeClasses
+          ExtendedDataType    
+            ARRAY 
+              #ClassName
+              #
+            ENDARRAY
+          StringSize          #40
+        ENDPROPERTIES
+        
+      FIELD #Description
+        Id 50002
+        STRING
+        PROPERTIES
+          Name                #Description
+          Label               #Описание
+          Table               #ltcAvailableTreeClasses
+          ExtendedDataType    
+            ARRAY 
+              #ClassDescription
+              #
+            ENDARRAY
+          StringSize          #255
+        ENDPROPERTIES
+        
+      FIELD #IsConfigurable
+        Id 50004
+        ENUM
+        PROPERTIES
+          Name                #IsConfigurable
+          Label               #Конфигурируемый
+          HelpText            #Используется возможность задания конфигураций дерева
+          AllowEdit           #No
+          Table               #ltcAvailableTreeClasses
+          EnumType            #NoYes
+        ENDPROPERTIES
+        
+    ENDFIELDS
+    GROUPS
+      GROUP #AutoLookup
+        PROPERTIES
+          Name                #AutoLookup
+        ENDPROPERTIES
+        
+        GROUPFIELDS
+          #ClassName
+          #Description
+        ENDGROUPFIELDS
+      ENDGROUP
+    ENDGROUPS
+    
+    INDICES
+      #MainIdx
+      Id 50001
+      PROPERTIES
+        Name                #MainIdx
+        AllowDuplicates     #No
+      ENDPROPERTIES
+      
+      INDEXFIELDS
+        #ClassName
+      ENDINDEXFIELDS
+      
+    ENDINDICES
+    REFERENCES
+    ENDREFERENCES
+    
+    DELETEACTIONS
+    ENDDELETEACTIONS
+    
+    METHODS
+      Version: 3
+      SOURCE #exist
+        #static boolean exist(ClassName _ClassName)
+        #{
+        #    return ( _ClassName) &&
+        #         (select firstonly recId from ltcAvailableTreeClasses
+        #        where ltcAvailableTreeClasses.ClassName == _ClassName).recId;
+        #}
+        #
+      ENDSOURCE
+      SOURCE #fillTable
+        #static void fillTable()
+        #{
+        #    #Macrolib.AviFiles
+        #    #define.Description("Description")
+        #
+        #    classId                         classId;
+        #    DictClass                       curClass;
+        #    Dictionary                      dictionary;
+        #    SysOperationProgress            progress;
+        #    ltcAvailableTreeClasses         availableTreeClasses;
+        #
+        #;
+        #    startLengthyOperation();
+        #    dictionary = new Dictionary();
+        #
+        #    progress   = new SysOperationProgress();
+        #
+        #    progress.setTotal(dictionary.classCnt());
+        #    progress.setAnimation(#AviFindFile);
+        #
+        #    classId = dictionary.classNext(classId);
+        #    while (classId)
+        #    {
+        #        progress.incCount();
+        #
+        #        curClass = dictionary.classObject(classId);
+        #        if (curClass)
+        #        {
+        #            progress.setCaption("Поиск классов деревьев");
+        #
+        #            if (SysDictClass::isSuperclass(classId, classNum(ltcTreeCtrlHandler)) && !curClass.isAbstract())
+        #            {
+        #                progress.setText(strFmt("@SYS25533",curClass.name()));
+        #                if (!ltcAvailableTreeClasses::exist(curClass.name()))
+        #                {
+        #                    availableTreeClasses.clear();
+        #                    availableTreeClasses.ClassName      = curClass.name();
+        #                    availableTreeClasses.IsConfigurable = SysDictClass::isEqualOrSuperclass(classId, classNum(ltcTreeCtrlHandler_FixedClassifier));
+        #                    availableTreeClasses.Description    = curClass.callStatic("Description");
+        #                    availableTreeClasses.insert();
+        #                }
+        #            }
+        #        }
+        #        classId = dictionary.classNext(classId);
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #find
+        #static ltcAvailableTreeClasses find(ClassName _ClassName, boolean _forupdate = false)
+        #{
+        #    ltcAvailableTreeClasses ltcAvailableTreeClasses;
+        #    ;
+        #    if ( _ClassName)
+        #    {
+        #        ltcAvailableTreeClasses.selectForUpdate(_forupdate);
+        #        select firstonly ltcAvailableTreeClasses where
+        #            ltcAvailableTreeClasses.ClassName == _ClassName;
+        #    }
+        #    return ltcAvailableTreeClasses;
+        #}
+        #
+      ENDSOURCE
+    ENDMETHODS
+  ENDTABLE
+  
+
+***Element: DBT
+
+; Microsoft Dynamics AX Table : ltcTmpDoneNodeTable unloaded
+; --------------------------------------------------------------------------------
+  TABLEVERSION 1
+  
+  TABLE #ltcTmpDoneNodeTable
+    Id 50296
+    PROPERTIES
+      Name                #ltcTmpDoneNodeTable
+      Label               #Развернутые узлы
+      Temporary           #Yes
+      CacheLookup         #EntireTable
+    ENDPROPERTIES
+    
+    FIELDS
+      FIELD #NodeNum
+        Id 50001
+        INT
+        PROPERTIES
+          Name                #NodeNum
+          Table               #ltcTmpDoneNodeTable
+          ExtendedDataType    
+            ARRAY 
+              #ltcNodeNum
+              #
+            ENDARRAY
+        ENDPROPERTIES
+        
+      FIELD #ParentNodeNum
+        Id 50002
+        INT
+        PROPERTIES
+          Name                #ParentNodeNum
+          Table               #ltcTmpDoneNodeTable
+          ExtendedDataType    
+            ARRAY 
+              #ltcNodeNum
+              #
+            ENDARRAY
+        ENDPROPERTIES
+        
+      FIELD #TableNum
+        Id 50003
+        INT
+        PROPERTIES
+          Name                #TableNum
+          Label               #Номер таблицы
+          HelpText            #Номер таблицы, по записи которой создан узел в дереве
+          Table               #ltcTmpDoneNodeTable
+        ENDPROPERTIES
+        
+    ENDFIELDS
+    GROUPS
+    ENDGROUPS
+    
+    INDICES
+      #MainIdx
+      Id 50001
+      PROPERTIES
+        Name                #MainIdx
+        AllowDuplicates     #No
+      ENDPROPERTIES
+      
+      INDEXFIELDS
+        #NodeNum
+      ENDINDEXFIELDS
+      
+    ENDINDICES
+    REFERENCES
+    ENDREFERENCES
+    
+    DELETEACTIONS
+    ENDDELETEACTIONS
+    
+    METHODS
+      Version: 3
+      SOURCE #delete
+        #public void delete()
+        #{
+        #    ltcTmpDoneNodeTable doneNodeTable;
+        #    ;
+        #    doneNodeTable.setTmpData(this);
+        #    while select doneNodeTable
+        #        where doneNodeTable.ParentNodeNum ==  this.NodeNum
+        #    {
+        #        doneNodeTable.delete();
+        #    }
+        #    /*
+        #        About "delete_from" !!!
+        #        In situations when the DELETE method is overridden, the system will transparently emulate
+        #        the situation of selecting and deleting one record at a time so that the overridden delete
+        #        method will be executed.
+        #
+        #        Здесь код с delete_from работал не корректно, как со временной таблицей, так и с постоянной.
+        #        Последнее не совсем понятно.
+        #
+        #        -- don
+        #    */
+        #    // delete_from doneNodeTable
+        #    //    where doneNodeTable.ParentNodeNum ==  this.NodeNum;
+        #    super();
+        #
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDTABLE
+  
+
+***Element: UTS
+
+; Microsoft Dynamics AX String: ltcFormDataSourceName выгружен
+; --------------------------------------------------------------------------------
+  USERTYPEVERSION 6
+  
+  USERTYPE #ltcFormDataSourceName
+  Id 50417
+  STRING
+    PROPERTIES
+      Name                #ltcFormDataSourceName
+      Label               #Источник данных
+      HelpText            #Выбор источника данных формы
+      Extends             #identifiername
+      StringSize          #40
+    ENDPROPERTIES
+    
+    TYPEELEMENTS
+    ENDTYPEELEMENTS
+    
+    TYPEREFERENCES
+    ENDTYPEREFERENCES
+    
+  ENDUSERTYPE
+  
+
+***Element: UTI
+
+; Microsoft Dynamics AX Integer: ltcTreeLevel выгружен
+; --------------------------------------------------------------------------------
+  USERTYPEVERSION 6
+  
+  USERTYPE #ltcTreeLevel
+  Id 50416
+  INT
+    PROPERTIES
+      Name                #ltcTreeLevel
+      Label               #Уровень
+      HelpText            #Уровень дерева
+    ENDPROPERTIES
+    
+    TYPEELEMENTS
+    ENDTYPEELEMENTS
+    
+    TYPEREFERENCES
+    ENDTYPEREFERENCES
+    
+  ENDUSERTYPE
+  
+
+***Element: UTS
+
+; Microsoft Dynamics AX String: ltcTreeConfId выгружен
+; --------------------------------------------------------------------------------
+  USERTYPEVERSION 6
+  
+  USERTYPE #ltcTreeConfId
+  Id 50359
+  STRING
+    PROPERTIES
+      Name                #ltcTreeConfId
+      Label               #Конфигурация
+      HelpText            #Код конфигурации
+    ENDPROPERTIES
+    
+    TYPEELEMENTS
+    ENDTYPEELEMENTS
+    
+    TYPEREFERENCES
+    ENDTYPEREFERENCES
+    
+  ENDUSERTYPE
+  
+
+***Element: UTS
+
+; Microsoft Dynamics AX String: ltcTreeClassName выгружен
+; --------------------------------------------------------------------------------
+  USERTYPEVERSION 6
+  
+  USERTYPE #ltcTreeClassName
+  Id 50358
+  STRING
+    PROPERTIES
+      Name                #ltcTreeClassName
+      Extends             #ClassName
+      StringSize          #40
+    ENDPROPERTIES
+    
+    TYPEELEMENTS
+    ENDTYPEELEMENTS
+    
+    TYPEREFERENCES
+      TYPEREFERENCETYPE DATASET
+      PROPERTIES
+        Table               #ltcAvailableTreeClasses
+        RelatedField        #ClassName
+      ENDPROPERTIES
+      
+    ENDTYPEREFERENCES
+    
+  ENDUSERTYPE
+  
+
+***Element: UTI
+
+; Microsoft Dynamics AX Integer: ltcNodeNum выгружен
+; --------------------------------------------------------------------------------
+  USERTYPEVERSION 6
+  
+  USERTYPE #ltcNodeNum
+  Id 50415
+  INT
+    PROPERTIES
+      Name                #ltcNodeNum
+      Label               #Код узла
+    ENDPROPERTIES
+    
+    TYPEELEMENTS
+    ENDTYPEELEMENTS
+    
+    TYPEREFERENCES
+    ENDTYPEREFERENCES
+    
+  ENDUSERTYPE
+  
+
+***Element: MCR
+
+; Microsoft Dynamics AX Macro: ltc выгружен
+; --------------------------------------------------------------------------------
+  JOBVERSION 1
+  
+  SOURCE #ltc
+    ##define.ltc_TreeCtrl('ltc_TreeCtrl')
+    ##define.ltc_Splitter('ltc_Splitter')
+    ##define.ltc_SplitterWidth(6)
+    ##define.ltc_TreeCtrlWidth(100)
+    ##define.ltc_AddColumns(2)
+    #
+  ENDSOURCE
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: ltcTreeCtrlHandler выгружен
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #ltcTreeCtrlHandler
+    Id 50799
+    PROPERTIES
+      Name                #ltcTreeCtrlHandler
+      Extends             #
+      RunOn               #Called from
+    ENDPROPERTIES
+    
+    METHODS
+      Version: 3
+      SOURCE #buildSubTree
+        #/* Этот метод опередяет логику развёртывания дерева. При этом логика одна для всех наследников.
+        #Для того чтобы наследник имел другое поведение, необходимо перекрыть ряд используемых тут методов.
+        #Idx - это идентификатор узла */
+        #protected void buildSubTree(int _parentIdx, anytype _ParentData, boolean _rebuild = false)
+        #{
+        #    FormTreeItem    formTreeItem;
+        #    Common          childRecord;
+        #    QueryRun        childQuery;
+        #    ImageRes        imageRes;
+        #    int             children; //счётчик дочерних узлов
+        #    int             idx;
+        #    int             hdl;
+        #    container       childData;
+        #
+        #    //Выполняем только если надо перепостроить дерево или узла нет в списке узлов
+        #    if (_rebuild || !doneTreeNodes.exist(_parentIdx))
+        #    {
+        #        //Если надо перепостроить дерево, удаляем в цикле всех детей
+        #        if (_rebuild) // delete existing subtree
+        #        {
+        #            hdl = formTreeControl.getChild(_parentIdx);
+        #            while (hdl)
+        #            {
+        #                formTreeControl.delete(hdl);
+        #                hdl = formTreeControl.getChild(_parentIdx);
+        #            }
+        #        }
+        #
+        #        children = #Zero;
+        #
+        #        //Формируем запрос для выборки всех детей данного узла
+        #        childQuery = this.subTreeQueryRun(_parentIdx, _ParentData);
+        #        while (childQuery.next())
+        #        {
+        #            childRecord = childQuery.getNo(1);
+        #
+        #            //В Data сохраняем TreeItemId - идентификатор узла в ltcTreeItems
+        #            formTreeItem = new FormTreeItem(this.getItemName(childRecord),
+        #                                            this.getItemImage(childRecord),
+        #                                            this.isHaveSubTree(_parentIdx, this.getItemData(childRecord)),
+        #                                            this.getItemData(childRecord));
+        #
+        #            if (this.canCheckNode())
+        #            {
+        #                imageRes = imageListCheckbox.image(#ImageCheckNone); //пустой квадрат
+        #                formTreeItem.stateImage(imageRes);
+        #            }
+        #            formTreeItem.stateSelected(false);
+        #
+        #            //Добавляем новый дочерний узел
+        #            idx = formTreeControl.addItem(_parentIdx,#Zero,formTreeItem);
+        #            children++;
+        #        }
+        #        //Запрашиваем родительский узел, указываем новое количество детей у него и сетим заново.
+        #        //Это для того, чтобы после добавление нового узла он сразу отображался, без этого почемуто не работает
+        #        formTreeItem = formTreeControl.getItem(_parentIdx);
+        #        if(formTreeItem)
+        #          {
+        #             formTreeItem.children(children);
+        #             formTreeControl.setItem(formTreeItem);
+        #          }
+        #
+        #        //Добавляем родительский узел в список уже развёрнутых
+        #        doneTreeNodes.add(_parentIdx, formTreeControl.getParent(_parentIdx));
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #canCheckNode
+        #protected boolean canCheckNode()
+        #{
+        #   return true;
+        #}
+      ENDSOURCE
+      SOURCE #classDeclaration
+        #/*
+        #*   ltc, LiteTreeClassifier, don
+        #*   Данный класс является общим предком для всех классов, реализующих поведение дерева.
+        #*/
+        #abstract class ltcTreeCtrlHandler
+        #{
+        #    // constants
+        #    #Define.NotExistsMenuItem(-2)
+        #    #Define.Zero(0)
+        #
+        #    FormDataSource      formDataSource;     //это DataSource из той формы на которой будут находиться дерево.
+        #    FormTreeControl     formTreeControl;    //это сам контрол дерева из формы, его поведением буду управлять из этого класса
+        #    TableId             resourceTableId;    //это идентификатор той таблицы записи которой будут упорядывачиваться в иерархию.
+        #    ltcDoneTreeNodes    doneTreeNodes;      //Пул для хранения узлов дерева. Используется для контроля того, был ли развёрнут узел или нет
+        #
+        #    //Списки загруженных картинок.
+        #    ImageListAppl       imageListTreeItem;
+        #    ImageListAppl       imageListCheckbox;
+        #
+        #    //Макросы определяющие списки картинок и коды клавиш.
+        #    #resAppl
+        #    #KEYPRESSED
+        #
+        #    boolean             stateChange;        //Переменная использутся для отслеживания ситуации смены состояния.
+        #
+        #    //Субменю
+        #    PopupMenu           masterMenu;         //Основное меню
+        #    PopupMenu           treeMenu;           //Тип отображаемого дерева
+        #
+        #    int                 selectedMenu;
+        #    Set                 selectedItems;      //Set для хранения списка выделенных узлов
+        #    str                 qFilter;
+        #    boolean             isCtrlPress;
+        #    int                 status;
+        #}
+      ENDSOURCE
+      SOURCE #eventBeginDrag
+        #void eventBeginDrag(int _x, int _y)
+        #{
+        #    // dummy method, would be implemented in Childs
+        #}
+      ENDSOURCE
+      SOURCE #eventContext
+        #/* Метод, реализующий вызов всплывающего меню. В наследниках надо перекрывать и добавлять свои пункты.
+        #Возвращает тот корень дерева меню в который можно добавлять свои меню. */
+        #void eventContext(int _windowHdl, int _menuHandle = 0)
+        #{
+        #    ;
+        #    masterMenu = PopupMenu::create( _menuHandle ? _menuHandle : WinAPI::createPopupMenu(), _windowHdl);
+        #    treeMenu = new PopupMenu(_windowHdl, masterMenu);
+        #}
+      ENDSOURCE
+      SOURCE #eventDrop
+        #void eventDrop(FormControl _dragSource, FormDrag _dragMode, int _x, int _y)
+        #{
+        #    // dummy method, would be implemented in Childs
+        #}
+      ENDSOURCE
+      SOURCE #eventExpanding
+        #/* Метод реализущий событие разворачивания узла дерева. Вся логика в buildSubTree() */
+        #public void eventExpanding(int _idx, FormTreeExpand _action, anytype _data)
+        #{
+        #    if (_action == FormTreeExpand::EXPAND)
+        #        this.buildSubTree(_idx, _data);
+        #}
+      ENDSOURCE
+      SOURCE #eventKeyDown
+        #/* Метод, реализующий событие нажатия кнопки. Реализуется эмуляцией вызова eventMouseUp() */
+        #public void eventKeyDown(int _vKey, boolean _Ctrl, boolean _Shift)
+        #{
+        #    switch(_vKey)
+        #    {
+        #        case (#space) :
+        #            this.eventMouseUp(#Zero,#Zero,#space, true, false);
+        #            break;
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #eventMouseUp
+        #/* Метод реализующий отжатие кнопки. Предназначен для смены состояния выделения узлов дерева. */
+        #public void eventMouseUp(int _x, int _y, int _button, boolean _Ctrl, boolean _Shift)
+        #{
+        #    FormTreeItem    formTreeItem;
+        #    ImageRes        stateImage;
+        #    ;
+        #    if (_Ctrl)
+        #    {
+        #        stateChange = true;
+        #        formTreeItem = formTreeControl.getItem(formTreeControl.getSelection());
+        #        switch (formTreeItem.stateImage())
+        #        {
+        #            case imageListCheckbox.image(#ImageCheckAll):
+        #                stateImage = imageListCheckbox.image(#ImageCheckNone);
+        #                break;
+        #            case imageListCheckbox.image(#ImageCheckNone):
+        #                {
+        #                stateImage = imageListCheckbox.image(#ImageCheckAll);
+        #                this.unCheckChild(formTreeItem);
+        #                }
+        #                break;
+        #        }
+        #
+        #        formTreeItem.stateImage(stateImage);
+        #        formTreeControl.setItem(formTreeItem);
+        #    } else {
+        #        stateChange = false;
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #eventSelectionChanged
+        #/* Метод реализующий переход с одного узла дерева на другой. Должен сопровождаться сменой фильтрации
+        #ресурсной таблицы. */
+        #abstract void eventSelectionChanged(FormTreeItem _OldItem, FormTreeItem _NewItem)
+        #{
+        #}
+      ENDSOURCE
+      SOURCE #eventStatusChange
+        #void eventStatusChange(int _idx)
+        #{
+        #
+        #}
+      ENDSOURCE
+      SOURCE #getDatasource
+        #formdatasource getDatasource()
+        #{
+        #    return formdatasource;
+        #}
+      ENDSOURCE
+      SOURCE #getItemData
+        #/* Вспомогательный метод, для использования в алгоритме развёртывания дерева. Должен возвращать
+        #значение, сохраняющиеся в узле дерева. */
+        #abstract protected anytype getItemData(Common _childRecord)
+        #{
+        #}
+        #
+        #
+      ENDSOURCE
+      SOURCE #getItemImage
+        #/* Вспомогательный метод, для использования в алгоритме развёртывания дерева. Должен тип картинки для
+        #узла дерева. */
+        #abstract protected ImageRes getItemImage(Common _childRecord)
+        #{
+        #}
+        #
+        #
+      ENDSOURCE
+      SOURCE #getItemName
+        #/* Вспомогательный метод, для использования в алгоритме развёртывания дерева.
+        #Должен возвращать название узла. */
+        #abstract protected str getItemName(Common _childRecord)
+        #{
+        #}
+      ENDSOURCE
+      SOURCE #getTreeLevel
+        #/* Метод для определения уровня в дереве заданного узла */
+        #int getTreeLevel( int _currentIdx)
+        #{
+        #    int rootIdx, ret;
+        #    ;
+        #    if(!_currentIdx) return #Zero;
+        #    rootIdx = formTreeControl.getRoot();
+        #    while (_currentIdx != rootIdx)
+        #    {
+        #        ret++;
+        #        _currentIdx = formTreeControl.getParent( _currentIdx);
+        #    }
+        #    return  ret;
+        #}
+      ENDSOURCE
+      SOURCE #init
+        #void init(container _parm = connull())
+        #{
+        #    ClassId     classId;
+        #    container   con;
+        #    [classId,con] = _parm;
+        #    if ( classId == classIdGet(this))
+        #    {
+        #        this.unpackSettings(con);
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #initRoot
+        #/* Метод предназначен для реализации логики формирования узла дерева, которая отличается для разных
+        #наследников */
+        #abstract protected void initRoot()
+        #{
+        #}
+      ENDSOURCE
+      SOURCE #isHaveSubTree
+        #/* Вспомогательный метод, для использования в алгоритме развёртывания дерева. Должен возвращать признак
+        #есть ли у узла дерева продолжение. */
+        #abstract protected boolean isHaveSubTree(int _parentIdx, anytype _ParentData)
+        #{
+        #}
+        #
+      ENDSOURCE
+      SOURCE #new
+        #void new(FormDataSource _formDataSource, FormTreeControl _formTreeControl)
+        #{
+        #    ;
+        #    formDataSource  = _formDataSource;
+        #    formTreeControl = _formTreeControl;
+        #    resourceTableId = formDataSource.table();
+        #
+        #    imageListTreeItem = new ImageListAppl_ltcTree();
+        #    formTreeControl.setImagelist(imageListTreeItem.imageList());
+        #    imageListCheckbox = new ImageListAppl_checkbox();
+        #    formTreeControl.setStateImagelist(imageListCheckbox.imageList());
+        #
+        #    doneTreeNodes = new ltcDoneTreeNodes();
+        #
+        #    selectedItems = new Set(Types::Integer);
+        #    this.initRoot();
+        #
+        #}
+      ENDSOURCE
+      SOURCE #packSettings
+        #container packSettings()
+        #{
+        #    return [classIdGet(this)];
+        #}
+      ENDSOURCE
+      SOURCE #parmstatus
+        #int parmstatus(int     _status = status)
+        #{
+        #    status = _status;
+        #    return status;
+        #}
+      ENDSOURCE
+      SOURCE #processPopupMenu
+        #/* process popup menu */
+        #protected boolean processPopupMenu()
+        #{
+        #    selectedMenu = #NotExistsMenuItem;
+        #    selectedMenu = masterMenu.draw();
+        #    if (selectedMenu < #Zero) return true;
+        #    return false;
+        #}
+      ENDSOURCE
+      SOURCE #subTreeQueryRun
+        #/* Метод должен формировать запрос, который мог бы вернуть информацию о структуре дерева.
+        #Для разных наследников данные могут браться из разных мест.*/
+        #abstract protected QueryRun subTreeQueryRun(int _parentIdx, anytype _ParentData)
+        #{
+        #}
+      ENDSOURCE
+      SOURCE #unCheckChild
+        #/* This function uncheck childs of the tree item*/
+        #private void unCheckChild(FormTreeItem _treeItem)
+        #{
+        #    FormTreeItem tempItem;
+        #    ;
+        #    tempItem = formTreeControl.getItem(formTreeControl.getChild(_treeItem.idx()));
+        #
+        #    while (tempItem)
+        #    {
+        #        if (tempItem.stateImage() == imageListCheckbox.image(#ImageCheckAll))
+        #        {
+        #            tempItem.stateImage(imageListCheckbox.image(#ImageCheckNone));
+        #            formTreeControl.setItem(tempItem);
+        #            selectedItems.remove(tempItem.idx());
+        #        }
+        #        this.unCheckChild(tempItem);
+        #
+        #        tempItem = formTreeControl.getItem(formTreeControl.getNextSibling(tempItem.idx()));
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #unpackSettings
+        #protected void unpackSettings(container _parm)
+        #{
+        #}
+      ENDSOURCE
+      SOURCE #construct
+        #static ltcTreeCtrlHandler construct(ClassName _className, FormDataSource _formDataSource, FormTreeControl _formTreeControl)
+        #{
+        #    SysDictClass dictClass;
+        #    ;
+        #    if (SysDictClass::isSuperclass(className2Id(_className), classNum(ltcTreeCtrlHandler)))
+        #    {
+        #        dictClass = new SysDictClass(className2Id(_className));
+        #        return dictClass.makeObject(_formDataSource, _formTreeControl);
+        #    }
+        #    throw error(strFmt("@SYS19306",funcName()));
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: ltcTreeCtrlHandler_FixedClassifier выгружен
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #ltcTreeCtrlHandler_FixedClassifier
+    Id 50800
+    PROPERTIES
+      Name                #ltcTreeCtrlHandler_FixedClassifier
+      Extends             #ltcTreeCtrlHandler
+      RunOn               #Called from
+    ENDPROPERTIES
+    
+    METHODS
+      Version: 3
+      SOURCE #actionClearItem
+        #/*
+        #*  This method implements node deletion.
+        #*/
+        #protected void actionClearItem()
+        #{
+        #    int             i;
+        #    FormTreeItem    fti;
+        #    ;
+        #    i = formTreeControl.getChild(formTreeControl.getSelection());
+        #    while (i)
+        #    {
+        #        formTreeControl.delete(i);
+        #        i = formTreeControl.getChild(formTreeControl.getSelection());
+        #    }
+        #    fti = formTreeControl.getItem(formTreeControl.getSelection());
+        #    fti.children(0);
+        #    formTreeControl.setItem(fti);
+        #    doneTreeNodes.remove(formTreeControl.getSelection());
+        #}
+      ENDSOURCE
+      SOURCE #canCheckNode
+        #protected boolean canCheckNode()
+        #{
+        #    return isMultiCheckFilter ? true : false;
+        #}
+      ENDSOURCE
+      SOURCE #classDeclaration
+        #/*
+        #*    ltc, LiteTreeClassifier, don
+        #*/
+        #class ltcTreeCtrlHandler_FixedClassifier extends ltcTreeCtrlHandler
+        #{
+        #    int                         nextFieldTemp;          // next field ID (for temporary use).
+        #    str                         tmpNodeFilter;
+        #    int                         MultiCheckFilter;       // switch between multi check nodes and show dimensions modes
+        #    boolean                     isMultiCheckFilter;     // enable/disable
+        #    ltcTreeConfId               confId;                 // configuration id
+        #    set                         confSet;                // set of fixed configurations
+        #    #define.CurrentVersion(1)
+        #    #localmacro.CurrentList
+        #    confId
+        #    #endmacro
+        #}
+      ENDSOURCE
+      SOURCE #confId
+        #ltcTreeConfId confId(ltcTreeConfId _confId = confId)
+        #{
+        #    ;
+        #    confId = _confId;
+        #    return confId;
+        #}
+      ENDSOURCE
+      SOURCE #createQueryFilter
+        #/*
+        #*   Creation of extended query range filter
+        #*/
+        #private void createQueryFilter(Set filteredItems, FormTreeItem treeItem, str ParentNodeFilter='')
+        #{
+        #    str                 curNodeFilter;
+        #    ltcTreeItemData     itemData;
+        #    ;
+        #    if (treeItem.idx() != formTreeControl.getRoot())
+        #      {
+        #        if (ParentNodeFilter != '')
+        #           {
+        #             curNodeFilter = ParentNodeFilter +  " && ";
+        #           }
+        #        itemData = treeItem.data();
+        #        curNodeFilter += "(" + fieldid2name(resourceTableId, fieldExt2Id(itemData.getItemId())) + ' == ' + ltcTreeCtrlHandler_FixedClassifier::aqrValue(itemData.getItemValue()) + ')';
+        #      }
+        #    if (!filteredItems.in(treeItem.idx()))
+        #      {
+        #         treeItem = formTreeControl.getItem(formTreeControl.getChild(treeItem.idx()));
+        #         while (treeItem)
+        #           {
+        #              this.createQueryFilter(filteredItems, treeItem, curNodeFilter);
+        #              treeItem = formTreeControl.getItem(formTreeControl.getNextSibling(treeItem.idx()));
+        #           }
+        #      }
+        #    else
+        #      {
+        #        if (qFilter != '') {qFilter += "||";}
+        #        qFilter +=  curNodeFilter;
+        #      }
+        #}
+      ENDSOURCE
+      SOURCE #eventContext
+        #void eventContext(int windowHdl)
+        #{
+        #    SetIterator     iter;
+        #    Map             menuItem;
+        #    int             menuFindInTheTree;
+        #    ;
+        #    super(windowHdl);
+        #    if (!stateChange)
+        #    {
+        #        masterMenu.insertPopupMenu("Выбор конфигурации",treeMenu);
+        #        menuFindInTheTree   = masterMenu.insertItem("Найти в дереве", false);
+        #        menuItem            = new Map(Types::Integer, Types::String);
+        #        iter                = new SetIterator(confSet);
+        #        while (iter.more())
+        #        {
+        #            menuItem.insert(
+        #                treeMenu.insertItem(ltcConfTable::find(iter.value()).ConfName, confid == iter.value()),
+        #                iter.value() );
+        #            iter.next();
+        #        }
+        #    }
+        #
+        #    if (!this.processPopupMenu())
+        #    {
+        #        switch (selectedMenu)
+        #        {
+        #            case menuFindInTheTree:
+        #                this.findInTheTree();
+        #                break;
+        #            default:
+        #                formTreeControl.select(formTreeControl.getRoot());
+        #                this.actionClearItem();
+        #                doneTreeNodes = new ltcDoneTreeNodes();
+        #                confId = menuItem.lookup(selectedMenu);
+        #                this.loadConfiguration();
+        #        }
+        #    }
+        #
+        #    stateChange = false;
+        #}
+        #
+        #
+      ENDSOURCE
+      SOURCE #eventExpanding
+        #public void eventExpanding(int idx, FormTreeExpand action, anytype data)
+        #{
+        #    //int rootIdx;
+        #    ltcConfLine fixedClassifierLine;
+        #    ;
+        #    //rootIdx = formTreeControl.getRoot();
+        #    select firstonly fixedClassifierLine
+        #    where FixedClassifierLine.ConfId    == confId &&
+        #          FixedClassifierLine.TreeLevel == this.getTreeLevel(idx);
+        #
+        #    if(fixedClassifierLine.FieldId)
+        #    {
+        #        nextFieldTemp = fixedClassifierLine.FieldId;
+        #    }
+        #
+        #    super(idx, action, data);
+        #}
+      ENDSOURCE
+      SOURCE #eventSelectionChanged
+        #/* Метод реализующий событие перехода к другому узлу дерева. Реализует смену фильтрации по дереву.
+        #Делаю следующее утверждение: Дерево является в данном случае способом наложения фильтрации на ресурсную
+        #таблицу. Как следствие любое наложение фильтра пользователем на одно из полей используемых для классификации
+        #приведёт к неадекватной навигации по дереву. Поэтому считаю, что единстенно правильный фильтр - это тот,
+        #который наложен самим деревом! */
+        #void eventSelectionChanged(FormTreeItem _OldItem, FormTreeItem _NewItem)
+        #{
+        #    QueryBuildDataSource    qbds;
+        #    Query                   q;
+        #    QueryBuildRange         range;
+        #    FormTreeItem            fti;
+        #    FieldId                 fid;
+        #    ltcTreeItemData        itemData;
+        #    ;
+        #    //Событие почемуто вызывается несколько раз, поэтому для ограничения количеств его обработки стоит
+        #    //условие. В любом случае выполняется для состояния навигации - по дереву.
+        #    if (_OldItem.data() && _NewItem.data())
+        #    {
+        #        //Получаем запрос представляющий ресурсную таблицу
+        #        q = formDataSource.queryRun().query();
+        #        qbds = q.dataSourceTable(resourceTableId);
+        #
+        #        //Далее следует обнуление условий фильтрации по старому узлу, которое выполняется только в случае,
+        #        //если узел не выделен для групповой фильтрации
+        #        if (_OldItem.stateImage() != imageListCheckbox.image(#ImageCheckAll))
+        #        {
+        #            //Удаляем старый узел из списка выделенных
+        #            selectedItems.remove(_OldItem.idx());
+        #            //При этом необходимо из фильтра удалить условие, которое накладывалось этим узлом
+        #            fti = _OldItem;
+        #            while (formTreeControl.getRoot() != fti.idx())
+        #            {
+        #                 itemData = fti.data();
+        #                 fid = itemData.getItemId();
+        #                 range = qbds.findRange(fid);
+        #                 //Если фильтр был наложен то обнуляем его
+        #                 if (range) range.value('');
+        #                 fti = formTreeControl.getItem(formTreeControl.getParent(fti.idx()));
+        #            }
+        #        }
+        #
+        #        //Добавляем новый узел в список выделенных.
+        #        selectedItems.add(_NewItem.idx());
+        #        if (isMultiCheckFilter)
+        #        {
+        #            qFilter = '';
+        #            this.createQueryFilter(selectedItems, formTreeControl.getItem(formTreeControl.getRoot()));
+        #            qbds.relations(false);
+        #            fid = fieldName2Id(resourceTableId,'RecId');
+        #            range = qbds.findRange(fid); //ищем нужный рэндж
+        #            if(qFilter != '')
+        #            {
+        #                if (!range)
+        #                {
+        #                    range = qbds.addRange(fid); //если его нет, то создаём снова
+        #                    range.status(RangeStatus::Locked);
+        #                }
+        #                range.value(qFilter);
+        #            }
+        #            else
+        #            {
+        #                if (range) qbds.clearRange(fid);
+        #            }
+        #        }
+        #        else
+        #        {
+        #            fti = _NewItem;
+        #
+        #            while (formTreeControl.getRoot() != fti.idx())
+        #            {
+        #                itemData = fti.data();
+        #                fid = itemData.getItemId();
+        #                range = qbds.findRange(fid);
+        #                if (!range) range = qbds.addRange(fid);
+        #                qFilter = sysQuery::value(itemData.getItemValue());
+        #                range.value(qFilter == '""""' ? SysQuery::valueEmptyString() : qFilter);
+        #                fti = FormTreeControl.getItem(FormTreeControl.getParent(fti.idx()));
+        #            }
+        #        }
+        #
+        #        formDataSource.queryRun().query(q);
+        #        formDataSource.research();
+        #        //this.eventStatusChange(this.parmstatus());
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #eventStatusChange
+        #void eventStatusChange(int _idx)
+        #{
+        #    FormTreeItem            fti;
+        #    QueryBuildDataSource    qbds;
+        #    Query                   q;
+        #    QueryBuildRange         range;
+        #    FieldId                 fid;
+        #    ltcTreeItemData         itemData;
+        #    boolean                 treeFilterEnabled = false;
+        #    ;
+        #    this.parmstatus(_idx);
+        #    q = formDataSource.queryRun().query();
+        #
+        #    qbds = q.dataSourceTable(resourceTableId);
+        #
+        #    fid = fieldName2Id(resourceTableId,'RecId');
+        #    range = qbds.findRange(fid);
+        #
+        #    if ( range && range.value())
+        #        treeFilterEnabled = true;
+        #
+        #    fid =  fieldName2Id(resourceTableId,'RecVersion');
+        #    range = qbds.findRange(fid);
+        #    if (!range) range = qbds.addRange(fid);
+        #
+        #    fti         = formTreeControl.getItem(formTreeControl.getSelection());
+        #    if ( fti.idx() == formTreeControl.getRoot()  )
+        #    {
+        #        fti = formTreeControl.getItem(formTreeControl.getChild(formTreeControl.getSelection()));
+        #    }
+        #
+        #    if(fti)
+        #        itemData    = fti.data();
+        #    if(itemData)
+        #        fid         = itemdata.getItemId();
+        #
+        #    if ( _idx > 0  )
+        #    {
+        #            range.value(qFilter);
+        #    }
+        #    else
+        #        range.value(sysQuery::valueUnlimited());
+        #
+        #    formDataSource.queryRun().query(q);
+        #    formDataSource.research();
+        #}
+      ENDSOURCE
+      SOURCE #findFilterInRange
+        #private boolean findFilterInRange(str _rangeValue, str _filter)
+        #{
+        #    str tempStr;
+        #    int charPosition;
+        #    boolean isFind = false;
+        #    ;
+        #    while (!isFind && (strlen(_rangeValue) > 0))
+        #    {
+        #        charPosition = strfind(_rangeValue, ",", 1, strlen(_rangeValue));
+        #        if (charPosition > 0)
+        #        {
+        #            tempStr = substr(_rangeValue, 1, charPosition - 1 );
+        #            _rangeValue = strdel(_rangeValue, 1, charPosition);
+        #        }
+        #        else
+        #        {
+        #            tempStr = _rangeValue;
+        #            _rangeValue = "";
+        #        }
+        #        if (tempStr == _filter)
+        #            isFind = true;
+        #    }
+        #    return isFind;
+        #}
+      ENDSOURCE
+      SOURCE #findInTheTree
+        #protected void findInTheTree()
+        #{
+        #   ltcConfLine          fixedClassifierLine;
+        #   common               record;
+        #   FormTreeItem         fti;
+        #   ltcTreeItemData      itemData;
+        #   FieldId              fid;
+        #   int                  idx;
+        #   ;
+        #   record = SysDictTable::newTableId(resourceTableId).makeRecord();
+        #   record.data(this.getDatasource().cursor());
+        #   fti = formTreeControl.getItem(formTreeControl.getRoot());
+        #   formTreeControl.expand(fti.idx());
+        #   while select fixedClassifierLine
+        #        order by TreeLevel
+        #            where fixedClassifierLine.ConfId == confId
+        #   {
+        #         fti = formTreeControl.getItem(formTreeControl.getChild(fti.idx()));
+        #         while (fti)
+        #         {
+        #            itemData = fti.data();
+        #            fid = itemData.getItemId();
+        #            if (itemData.getItemValue() == record.(fid))
+        #            {
+        #                formTreeControl.expand(fti.idx(),FormTreeExpand::Expand);
+        #                break;
+        #            }
+        #            fti = formTreeControl.getItem(formTreeControl.getNextSibling(fti.idx()));
+        #         }
+        #   }
+        #   formTreeControl.select(fti.idx());
+        #   this.getDatasource().findRecord(record);
+        #}
+      ENDSOURCE
+      SOURCE #getItemData
+        #anytype  getItemData(Common childRecord)
+        #{
+        #    ltcTreeItemData     itemData;
+        #    anytype             value;
+        #    ;
+        #    value       = childRecord.(nextFieldTemp);
+        #    itemData    = new ltcTreeItemData(nextFieldTemp,value);
+        #    return itemData;
+        #}
+      ENDSOURCE
+      SOURCE #getItemImage
+        #ImageRes getItemImage(Common childRecord)
+        #{
+        #    return imageListTreeItem.image(#imageFolder);
+        #}
+      ENDSOURCE
+      SOURCE #getItemName
+        #str getItemName(Common childRecord)
+        #{
+        #    anytype value;
+        #    ;
+        #    value = childRecord.(nextFieldTemp);
+        #    switch (typeof(value))
+        #    {
+        #        case types::Enum:
+        #            return enum2str(value);
+        #        case types::String,
+        #             types::RString,
+        #             Types::VARSTRING:
+        #            // TODO Подтягивание названия из справочника
+        #            value = this.getReferenceName(value);
+        #            return value ? value : "Пусто";
+        #
+        #        case types::Date:
+        #            return date2Str(value,123,2,2,2,2,2);
+        #        case Types::REAL:
+        #            return num2str(value,0,16,1,0);
+        #    }
+        #    return any2str(value);
+        #}
+      ENDSOURCE
+      SOURCE #getReferenceName
+        #anytype getReferenceName(anytype _value)
+        #{
+        #    return _value;
+        #}
+      ENDSOURCE
+      SOURCE #getSelectedFieldByCurrentItem
+        #/*
+        #*   Метод возвращает Set содержащий все коды выбранных полей начиная
+        #*   с текущего выбранного узла до корня дерева
+        #*/
+        #Set getSelectedFieldByCurrentItem()
+        #{
+        #    FormTreeItem        formTreeItem;
+        #    Set                 usedField;
+        #    ltcTreeItemData    itemData;
+        #    ;
+        #    usedField = new Set(Types::Integer);
+        #    formTreeItem = formTreeControl.getItem(formTreeControl.getSelection());
+        #    while(formTreeControl.getRoot() != formTreeItem.idx())
+        #    {
+        #        itemData = formTreeItem.data();
+        #        usedField.add(itemData.getItemId());
+        #        formTreeItem = formTreeControl.getItem(formTreeControl.getParent(formTreeItem.idx()));
+        #    }
+        #
+        #    return usedField;
+        #}
+      ENDSOURCE
+      SOURCE #init
+        #void init(container _parm)
+        #{
+        #    ;
+        #    super(_parm);
+        #    this.loadConfiguration();
+        #}
+      ENDSOURCE
+      SOURCE #initRoot
+        #protected void initRoot()
+        #{
+        #    FormTreeItem formTreeItem;
+        #    DictTable dictTable;
+        #    ImageRes imageRes;
+        #    ltcTreeItemData rootItemData = new ltcTreeItemData(0,'*');
+        #    ;
+        #    dictTable = new DictTable(resourceTableId);
+        #
+        #    //Получаем корень дерева для текущей таблицы (элементы которой упорядывачиваются)
+        #    //создаём корень дерева:
+        #    //Название - лабел у упорядывачиваемой таблицы
+        #    //Имадж - пока константа
+        #    //чилдрен - 1 - определяет факт наличия элементов нижнего уровня
+        #    //дата - идентификатор иерархии в FormTreeItem
+        #    imageRes = imageListTreeItem.image(#imageAxapta);
+        #    formTreeItem = new FormTreeItem(dictTable.label(), imageRes, false, rootItemData);
+        #    //Добавляем узел в дерево:
+        #    formTreeControl.addItem(0,0,formTreeItem);
+        #}
+      ENDSOURCE
+      SOURCE #isHaveSubTree
+        #protected boolean isHaveSubTree(int _parentIdx, anytype _ParentData)
+        #{
+        #    return ( select ltcConfLine
+        #                where  ltcConfLine.ConfId    == confId
+        #                    && ltcConfLine.TreeLevel == (this.getTreeLevel(_parentIdx)+1)
+        #                                                                                        ).RecId;
+        #}
+      ENDSOURCE
+      SOURCE #loadConfiguration
+        #void loadConfiguration()
+        #{
+        #    int         rootIdx;
+        #    ltcConfLine fixedClassifierLine;
+        #    str         helptext;
+        #    ;
+        #    isMultiCheckFilter = ltcConfLine::IsCanMultiSelect(confId);
+        #    rootIdx = formTreeControl.getRoot();
+        #
+        #    select  firstonly fixedClassifierLine
+        #        where  fixedClassifierLine.ConfId    == confId
+        #            && fixedClassifierLine.TreeLevel == this.getTreeLevel(rootIdx);
+        #
+        #    if (fixedClassifierLine.FieldId)
+        #    {
+        #        nextFieldTemp =  fixedClassifierLine.FieldId;
+        #        this.buildSubTree(rootIdx, formTreeControl.getItem(rootIdx).data());
+        #    }
+        #    //expand first tree level
+        #    formTreeControl.expand(formTreeControl.getRoot(),formTreeExpand::Expand);
+        #    // Tree Configuration Help
+        #    helptext = strfmt("Конфигурация %1:",  ltcConfTable::find(confId).ConfName);
+        #
+        #    while select fixedClassifierLine
+        #        order by TreeLevel
+        #            where  fixedClassifierLine.ConfId == confId
+        #    {
+        #        helptext += strfmt(" Уровнь %1 - %2", fixedClassifierLine.TreeLevel, new DictField(fixedClassifierLine.RefTableId,fixedClassifierLine.FieldId).label());
+        #    }
+        #    formTreeControl.helpText(helptext);
+        #}
+      ENDSOURCE
+      SOURCE #new
+        #void new(FormDataSource _formDataSource, FormTreeControl _formTreeControl)
+        #{
+        #    ltcConfTable confTable;
+        #    ;
+        #    isMultiCheckFilter  = false; //default value
+        #    stateChange         = false;
+        #
+        #    super(_formDataSource, _formTreeControl);
+        #
+        #    // read configurations
+        #    confSet = new Set(Types::String);
+        #
+        #    while select confTable
+        #        where confTable.RefTableId == resourceTableId
+        #    {
+        #        if (confId == '')
+        #        {
+        #            confId = confTable.ConfId;  // default configuration
+        #        }
+        #        confSet.add(confTable.ConfId);
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #packSettings
+        #protected container packSettings()
+        #{
+        #    container ret;
+        #    ;
+        #    ret = super();
+        #
+        #    return ret + [confId];
+        #}
+      ENDSOURCE
+      SOURCE #subTreeQueryRun
+        #/*
+        #*    Формируем запрос, который возвратит всех детей данного узла
+        #*   _ParentItemId - это идентификатор родительского узла в ltcTreeItems
+        #*/
+        #protected QueryRun subTreeQueryRun(int _parentIdx, anytype _ParentData)
+        #{
+        #    FormTreeItem            formTreeItem;
+        #    Query                   query;
+        #    QueryBuildDataSource    qbds, sourceQBDS;
+        #    ltcTreeItemData         itemData;
+        #    int dinaLinkCount, i;
+        #    QueryBuildDynalink sourceQBDL;
+        #    ;
+        #    query = new Query();
+        #    qbds = query.addDataSource(resourceTableId);
+        #    qbds.orderMode(OrderMode::GroupBy);
+        #
+        #    //UVI в запросе создаём такой же диналинк, как и в исходном источнике данных, чтобы можно было использовать дерево на подчинённых формах, например на строках документов
+        #    sourceQBDS = formDataSource.query().dataSourceTable(resourceTableId);
+        #    dinaLinkCount = sourceQBDS.dynalinkCount();
+        #    for (i=1; i<=dinaLinkCount; i++) {
+        #        sourceQBDL = sourceQBDS.dynalink(i);
+        #        qbds.addDynalink(sourceQBDL.field(), sourceQBDL.cursor(), sourceQBDL.dynamicField());
+        #    }
+        #
+        #    if(nextFieldTemp)
+        #    {
+        #        qbds.addSelectionField(nextFieldTemp);
+        #        qbds.addSortField(nextFieldTemp);
+        #    }
+        #    formTreeItem = formTreeControl.getItem(_parentIdx);
+        #    while (formTreeControl.getRoot() != formTreeItem.idx())
+        #    {
+        #        itemData = formTreeItem.data();
+        #        qbds.addRange(itemData.getItemId()).value(sysQuery::value(itemData.getItemValue()));
+        #        formTreeItem = formTreeControl.getItem(formTreeControl.getParent(formTreeItem.idx()));
+        #    }
+        #
+        #    query.forceNestedLoop(true);
+        #    query.forceSelectOrder(true);
+        #
+        #    return new QueryRun(query);
+        #}
+      ENDSOURCE
+      SOURCE #unpackSettings
+        #protected void unpackSettings(container _parm)
+        #{
+        #    ;
+        #    [confId] = _parm;
+        #}
+      ENDSOURCE
+      SOURCE #aqrValue
+        #/*
+        #*   return value for advanced query range (opposite SysQuery.value())
+        #*/
+        #static str aqrValue(anytype _value)
+        #{
+        #    ;
+        #    switch (typeof(_value))
+        #    {
+        #        case types::Enum,
+        #             types::Integer:
+        #            return int2str(_value);
+        #        case types::String,
+        #             types::RString,
+        #             Types::VARSTRING:
+        #            return strFmt('"%1"',_value);
+        #        case types::Date:
+        #           return date2StrXpp(_value);
+        #        case Types::REAL:
+        #           return num2str(_value,0,16,1,0);
+        #    }
+        #
+        #    return any2str(_value);
+        #}
+      ENDSOURCE
+      SOURCE #description
+        #static ClassDescription description()
+        #{
+        #    return "Фиксированный классификатор";    //Fixed Classifier
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: ltcFormMethodHandler выгружен
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #ltcFormMethodHandler
+    Id 50804
+    PROPERTIES
+      Name                #ltcFormMethodHandler
+      Extends             #
+      RunOn               #Called from
+    ENDPROPERTIES
+    
+    METHODS
+      Version: 3
+      SOURCE #classDeclaration
+        #/*
+        #*    ltc, LiteTreeClassifier, don
+        #*/
+        #class ltcFormMethodHandler implements SysSaveable
+        #{
+        #    FormRun                             formRun;
+        #    FormGroupControl                    splitter;
+        #    FormTreeControl                     treeCtrl;
+        #    sysFormSplitter_x                   formSplitter;
+        #    object                              ctrlObject;
+        #    ltcTreeCtrlHandler                  treeDataSource;
+        #    FormDataSource                      dataSource;
+        #    int                                 spliterPos;
+        #    ltcFormSetup                        ltcFormSetup;
+        #    container                           con;
+        #    #define.CurrentVersion(1)
+        #    #localmacro.CurrentList
+        #    spliterPos
+        #    #endmacro
+        #    #ltc
+        #}
+      ENDSOURCE
+      SOURCE #createFormControls
+        #void createFormControls(FormControlName _parentControlName = '')
+        #{
+        #    Object parentControl;
+        #    ;
+        #    if (_parentControlName)
+        #    {
+        #        parentControl = formRun.design().controlName(_parentControlName);
+        #        if (classIdGet(parentControl) != classNum(FormGroupControl) && classIdGet(parentControl) != classNum(FormTabPageControl))
+        #        {
+        #            parentControl = NULL;
+        #        }
+        #    }
+        #    if (!parentControl)
+        #    {
+        #        parentControl =  formRun.design();
+        #    }
+        #
+        #    parentControl.columns(parentControl.columns()+#ltc_AddColumns);
+        #
+        #    treeCtrl = parentControl.addControl(FormControlType::Tree,#ltc_TreeCtrl);
+        #    treeCtrl.width(#ltc_TreeCtrlWidth);
+        #    treeCtrl.heightMode(FormHeight::ColumnHeight);
+        #    parentControl.moveControl(treeCtrl.id());
+        #
+        #    splitter = parentControl.addControl(FormControlType::Group,#ltc_Splitter);
+        #    splitter.width(#ltc_SplitterWidth);
+        #    splitter.heightMode(FormHeight::ColumnHeight);
+        #    splitter.hideIfEmpty(false);
+        #    splitter.frameType(FormFrameType::Raised3D);
+        #    splitter.backgroundColor(WindowsPalette::WindowBackground);
+        #    parentControl.moveControl(splitter.id(),treeCtrl.id());
+        #
+        #
+        #}
+      ENDSOURCE
+      SOURCE #deleteLast
+        #private void deleteLast()
+        #{
+        #;
+        #    xSysLastValue::deleteLast(this);
+        #}
+      ENDSOURCE
+      SOURCE #formControlMove
+        #private void formControlMove(int _controlId,int _prev, FormGroupControl _baseCtrl =NULL)
+        #{
+        #
+        #   formControl     formControl;
+        #    Object          parentControl;
+        #    Object          inserAfterContol;
+        #    Object          oldParentControl;
+        #    int             formControlUserOrgContainer;
+        #    ;
+        #    formControl = formRun.design().control(_controlId);
+        #
+        #    // If control was already moved userOrgContainer is different from 0
+        #    formControlUserOrgContainer = formControl.userOrgContainer();
+        #
+        #    if (formControl.containerId())
+        #    {
+        #        oldParentControl = formRun.design().control( formControl.containerId() );
+        #        // Do not override a previous original container
+        #        if (!formControlUserOrgContainer)
+        #            formControlUserOrgContainer = formControl.containerId();
+        #    }
+        #    else
+        #    {
+        #        oldParentControl = formRun.design();
+        #        // Do not override a previous original container
+        #        if (!formControlUserOrgContainer)
+        #            formControlUserOrgContainer = -1;
+        #    }
+        #        if (_baseCtrl)
+        #            parentControl =  _baseCtrl;
+        #        else
+        #            parentControl =  formRun.design();
+        #
+        #    parentControl.useUserLayout(true);  // useUserLayot should be called before moving controls around
+        #    oldParentControl.useUserLayout(true);
+        #    parentControl.moveControl(formControl.id(),_prev);
+        #    // now we need to set the orgContainer
+        #    formControl.userOrgContainer(formControlUserOrgContainer);
+        #
+        #}
+        #
+      ENDSOURCE
+      SOURCE #getLast
+        #public void getLast()
+        #{
+        #    ;
+        #    xSysLastValue::getLast(this);
+        #}
+      ENDSOURCE
+      SOURCE #init
+        #void init()
+        #{
+        #    ;
+        #    formRun.controlMethodOverload(true);
+        #    formRun.controlMethodOverloadObject(this);
+        #    ltcFormSetup = ltcFormSetup::find(formRun.name());
+        #    datasource = formRun.dataSource(ltcFormSetup.ltcFormDataSourceName);
+        #    if (!datasource)
+        #    {
+        #        datasource = formRun.dataSource();
+        #    }
+        #    this.createFormControls(ltcFormSetup.FormControlName);
+        #    this.getLast();
+        #    if (treeCtrl)
+        #    {
+        #        formSplitter  = new sysFormSplitter_x(splitter, treeCtrl);
+        #        treeCtrl.widthmode(-1);
+        #        treeCtrl.width(spliterPos);
+        #        treeDataSource = ltcTreeCtrlHandler::construct(ltcFormSetup.ltcTreeClassName,datasource, treeCtrl);
+        #        treeDataSource.init(con);
+        #        treeCtrl.select(treeCtrl.getRoot());    //don, 25.03.2011, bugfix (не накладывался фильтр при первом клике по дереву)
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #initParmDefault
+        #public void initParmDefault()
+        #{
+        #    ;
+        #    spliterPos = #ltc_TreeCtrlWidth;
+        #
+        #}
+      ENDSOURCE
+      SOURCE #lastValueDataAreaId
+        #public dataAreaId lastValueDataAreaId()
+        #{
+        #    return curExt();
+        #}
+      ENDSOURCE
+      SOURCE #lastValueDesignName
+        #public identifiername lastValueDesignName()
+        #{
+        #    return classId2Name(classIdGet(this));
+        #}
+      ENDSOURCE
+      SOURCE #lastValueElementName
+        #public identifiername lastValueElementName()
+        #{
+        #    return formRun.name();
+        #}
+      ENDSOURCE
+      SOURCE #lastValueType
+        #public UtilElementType lastValueType()
+        #{
+        #    return UtilElementType::Form;
+        #}
+      ENDSOURCE
+      SOURCE #lastValueUserId
+        #public userId lastValueUserId()
+        #{
+        #    return curUserId();
+        #}
+      ENDSOURCE
+      SOURCE #ltc_Splitter_MouseDown
+        #int ltc_Splitter_MouseDown(int _x, int _y, int _button, boolean _ctrl, boolean _shift)
+        #{
+        #    ;
+        #    ctrlObject = formRun.controlCallingMethod();
+        #    ctrlObject.mouseDown(_x, _y, _button, _ctrl, _shift);
+        #    return formSplitter.mouseDown(_x, _y, _button, _ctrl, _shift);
+        #}
+        #
+      ENDSOURCE
+      SOURCE #ltc_Splitter_MouseMove
+        #int ltc_Splitter_MouseMove(int _x, int _y, int _button, boolean _ctrl, boolean _shift)
+        #{
+        #    ;
+        #    ctrlObject = formRun.controlCallingMethod();
+        #    ctrlObject.mouseMove(_x, _y, _button, _ctrl, _shift);
+        #    return formSplitter.mouseMove(_x, _y, _button, _ctrl, _shift);
+        #}
+        #
+      ENDSOURCE
+      SOURCE #ltc_Splitter_MouseUp
+        #int ltc_Splitter_MouseUp(int _x, int _y, int _button, boolean _ctrl, boolean _shift)
+        #{
+        #    ;
+        #    ctrlObject = formRun.controlCallingMethod();
+        #    ctrlObject.mouseUp(_x, _y, _button, _ctrl, _shift);
+        #    treeCtrl.widthMode(-1);
+        #    return formSplitter.mouseUp(_x, _y, _button, _ctrl, _shift);
+        #}
+      ENDSOURCE
+      SOURCE #ltc_TreeCtrl_BeginDrag
+        #public int ltc_TreeCtrl_BeginDrag(int _x, int _y)
+        #{
+        #    int ret;
+        #    ;
+        #    ctrlObject = formRun.controlCallingMethod();
+        #    ret = ctrlObject.beginDrag(_x, _y);
+        #    treeDataSource.eventBeginDrag(_x,_y);
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #ltc_TreeCtrl_Context
+        #public void ltc_TreeCtrl_Context()
+        #{
+        #    ;
+        #    treeDataSource.eventContext(formRun.hWnd());
+        #}
+      ENDSOURCE
+      SOURCE #ltc_TreeCtrl_Drop
+        #public void ltc_TreeCtrl_Drop(FormControl _dragSource, FormDrag _dragMode, int _x, int _y)
+        #{
+        #    ;
+        #    ctrlObject = formRun.controlCallingMethod();
+        #    ctrlObject.drop(_dragSource, _dragMode, _x, _y);
+        #    treeDataSource.eventDrop(_dragSource, _dragMode, _x, _y);
+        #}
+      ENDSOURCE
+      SOURCE #ltc_TreeCtrl_Expanding
+        #public boolean ltc_TreeCtrl_Expanding(int _Idx, FormTreeExpand _action, anytype _data)
+        #{
+        #    boolean ret;
+        #    ;
+        #    ctrlObject = formRun.controlCallingMethod();
+        #    treeDataSource.eventExpanding(_Idx, _action, _data);
+        #    ret = ctrlObject.expanding(_Idx, _action, _data);
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #ltc_TreeCtrl_KeyDown
+        #public boolean ltc_TreeCtrl_KeyDown(int _vKey, boolean _Ctrl, boolean _Shift)
+        #{
+        #    boolean ret;
+        #    ;
+        #    ctrlObject = formRun.controlCallingMethod();
+        #    ret = ctrlObject.keyDown(_vKey, _Ctrl, _Shift);
+        #    treeDataSource.eventKeyDown(_vKey, _Ctrl, _Shift);
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #ltc_TreeCtrl_mouseUp
+        #public int ltc_TreeCtrl_mouseUp(int _x, int _y, int _button, boolean _Ctrl, boolean _Shift)
+        #{
+        #    int     ret;
+        #    ;
+        #    ctrlObject = formRun.controlCallingMethod();
+        #    ret = ctrlObject.mouseUp(_x, _y, _button, _Ctrl, _Shift);
+        #    treeDataSource.eventMouseUp(_x, _y, _button, _Ctrl, _Shift);
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #ltc_TreeCtrl_selectionChanged
+        #public void ltc_TreeCtrl_SelectionChanged(FormTreeItem _OldItem, FormTreeItem _NewItem, FormTreeSelect _how)
+        #{
+        #    ;
+        #    ctrlObject = formRun.controlCallingMethod();
+        #    treeDataSource.eventSelectionChanged(_OldItem, _NewItem);
+        #    ctrlObject.selectionChanged(_OldItem, _NewItem, _how);
+        #}
+      ENDSOURCE
+      SOURCE #ltc_TreeCtrl_showContextMenu1
+        #public int ltc_TreeCtrl_showContextMenu1(int _menuHandle)
+        #{
+        #     ;
+        #     treeDataSource.eventContext(formRun.hWnd(),_menuHandle);
+        #    return 0;
+        #}
+        #
+      ENDSOURCE
+      SOURCE #new
+        #void new(FormRun _formRun)
+        #{
+        #    ;
+        #    formRun = _formRun;
+        #}
+      ENDSOURCE
+      SOURCE #pack
+        #public container pack()
+        #{
+        #    if (treeDataSource)
+        #        return [#CurrentVersion,#CurrentList,treeDataSource.packSettings()];
+        #    else
+        #        return [#CurrentVersion,#CurrentList];
+        #}
+      ENDSOURCE
+      SOURCE #saveLast
+        #public void saveLast()
+        #{
+        #    ;
+        #    if(treeCtrl)
+        #    {
+        #        spliterPos  = treeCtrl.widthValue();
+        #        xSysLastValue::saveLast(this);
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #setDatasource
+        #void setDatasource(FormDataSource _dataSource)
+        #{
+        #    ;
+        #    datasource = _datasource;
+        #}
+      ENDSOURCE
+      SOURCE #unpack
+        #public boolean unpack(container packedClass)
+        #{
+        #    Version         version     = ltcFormMethodHandler::getVersion(packedClass);
+        #
+        #
+        #    switch (version)
+        #    {
+        #        case #CurrentVersion:
+        #            [version,#CurrentList,con] = packedClass;
+        #            break;
+        #        default:
+        #            return false;
+        #    }
+        #    return true;
+        #}
+      ENDSOURCE
+      SOURCE #getVersion
+        #client server static Integer getVersion(container packedClass)
+        #{
+        #    boolean isInt(anyType a)
+        #    {
+        #        return typeof(a) == Types::Integer;
+        #    }
+        #
+        #    if (isInt(conPeek(packedClass,1)))
+        #        return conPeek(packedClass,1);
+        #    return 0;
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: ltcTreeItemData выгружен
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #ltcTreeItemData
+    Id 51035
+    PROPERTIES
+      Name                #ltcTreeItemData
+      Extends             #
+      RunOn               #Called from
+    ENDPROPERTIES
+    
+    METHODS
+      Version: 3
+      SOURCE #classDeclaration
+        #// instance of this class contain data, which linking to tree item
+        #class ltcTreeItemData
+        #{
+        #    int     itemId;
+        #    anytype itemValue;
+        #}
+      ENDSOURCE
+      SOURCE #getItemId
+        #int getItemId()
+        #{
+        #    return itemId;
+        #}
+      ENDSOURCE
+      SOURCE #GetItemValue
+        #anytype getItemValue()
+        #{
+        #    return itemValue;
+        #}
+      ENDSOURCE
+      SOURCE #new
+        #void new(int _itemId, anytype _itemValue)
+        #{
+        #    ;
+        #    itemId = _itemId;
+        #    itemValue = _itemValue;
+        #}
+      ENDSOURCE
+      SOURCE #setItemId
+        #void setItemId(int _itemId)
+        #{
+        #   ;
+        #   itemId = _itemId;
+        #}
+      ENDSOURCE
+      SOURCE #setItemValue
+        #void setItemValue(anytype _itemValue)
+        #{
+        #    itemValue = _itemValue;
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: ltcDoneTreeNodes выгружен
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #ltcDoneTreeNodes
+    Id 51034
+    PROPERTIES
+      Name                #ltcDoneTreeNodes
+      Extends             #
+      RunOn               #Called from
+    ENDPROPERTIES
+    
+    METHODS
+      Version: 3
+      SOURCE #add
+        #void add(ltcNodeNum _nodeNum, ltcNodeNum _parentNodeNum = -1, int _tableNum = 0)
+        #{
+        #    if (!this.exist(_nodeNum))
+        #    {
+        #        doneNodeTable.NodeNum       = _nodeNum;
+        #        doneNodeTable.ParentNodeNum = _parentNodeNum;
+        #        doneNodeTable.TableNum      = _tableNum;
+        #        doneNodeTable.insert();
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #classDeclaration
+        #/*
+        #*   Развернутые узлы,
+        #*   Вспомогательный класс, задающий структуру объекта,
+        #*   хранящего список развернутых узлов для FormTreeControl.
+        #*   Хранение в такой структуре необходимо для облегчения удаления
+        #*   узлов по рекурсии. Такая необходимость возникает при
+        #*   перестроении дерева после перетаскивания узлов.
+        #*/
+        #class ltcDoneTreeNodes
+        #{
+        #    ltcTmpDoneNodeTable doneNodeTable;
+        #}
+      ENDSOURCE
+      SOURCE #exist
+        #boolean exist(ltcNodeNum _nodeNum)
+        #{
+        #    ;
+        #    select doneNodeTable
+        #        where doneNodeTable.NodeNum == _nodeNum;
+        #    return doneNodeTable.NodeNum;
+        #}
+      ENDSOURCE
+      SOURCE #remove
+        #void remove(ltcNodeNum _nodeNum)
+        #{
+        #    if (this.exist(_nodeNum))
+        #    {
+        #        doneNodeTable.delete();
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #test
+        #void test()
+        #{
+        #    ;
+        #    while select doneNodeTable
+        #    {
+        #        print  doneNodeTable.NodeNum, ' ', doneNodeTable.ParentNodeNum;
+        #    }
+        #    pause;
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: ImageListAppl_ltcTree выгружен
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #ImageListAppl_ltcTree
+    Id 51036
+    PROPERTIES
+      Name                #ImageListAppl_ltcTree
+      Extends             #ImageListAppl
+      RunOn               #Client
+    ENDPROPERTIES
+    
+    METHODS
+      Version: 3
+      SOURCE #build
+        #protected void build()
+        #{
+        #    super();
+        #    this.add(#imageAxapta);
+        #    this.add(#imageFolder);
+        #    this.add(#ImageService);
+        #}
+      ENDSOURCE
+      SOURCE #classDeclaration
+        #class ImageListAppl_ltcTree extends ImageListAppl
+        #{
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: FRM
+
+; Microsoft Dynamics AX Forms unloaded
+; --------------------------------------------------------------------------------
+FRMVERSION 5
+
+FORM #ltcConfTable
+  PROPERTIES
+    Name                #ltcConfTable
+  ENDPROPERTIES
+  
+  METHODS
+    Version: 3
+    SOURCE #classDeclaration
+      #public class FormRun extends ObjectRun
+      #{
+      #        SysFormSplitter_Y               formSplitterVertical;
+      #}
+    ENDSOURCE
+    SOURCE #init
+      #public void init()
+      #{
+      #    super();
+      #
+      #    formSplitterVertical   = new SysFormSplitter_Y(ctrlSplitHori, table, this);
+      #}
+    ENDSOURCE
+  ENDMETHODS
+  OBJECTBANK
+    PROPERTIES
+    ENDPROPERTIES
+    
+    DATASOURCE
+      OBJECTPOOL
+        PROPERTIES
+          Name                #ltcConfTable
+          Table               #ltcConfTable
+          InsertAtEnd         #No
+          InsertIfEmpty       #No
+        ENDPROPERTIES
+        
+        FIELDLIST
+        ENDFIELDLIST
+      ENDOBJECTPOOL
+    ENDDATASOURCE
+    DATASOURCE
+      OBJECTPOOL
+        PROPERTIES
+          Name                #ltcConfLine
+          Table               #ltcConfLine
+          Index               #LineIdx
+          JoinSource          #ltcConfTable
+          InsertIfEmpty       #No
+        ENDPROPERTIES
+        
+        FIELDLIST
+        ENDFIELDLIST
+      ENDOBJECTPOOL
+      METHODS
+        Version: 3
+        SOURCE #initValue
+          #public void initValue()
+          #{
+          #    ;
+          #    ltcConfLine.initFromltcConfTable(ltcConfTable);
+          #    super();
+          #}
+        ENDSOURCE
+      ENDMETHODS
+    ENDDATASOURCE
+  ENDOBJECTBANK
+  
+  JOINS
+    ltcConfLine ltcConfTable
+  ENDJOINS
+  
+  DESIGN
+    PROPERTIES
+      Caption             #Конфигурации дерева
+      WindowType          #Workspace
+    ENDPROPERTIES
+    
+    CONTAINER
+      CONTROL GROUP
+        PROPERTIES
+          Name                #Table
+          AutoDeclaration     #Yes
+          Width               #Column width
+          Height              #290
+          FrameType           #None
+        ENDPROPERTIES
+        
+          CONTAINER
+            CONTROL TAB
+              PROPERTIES
+                Name                #TabHeader
+                Width               #Column width
+                Height              #Column height
+                DataSource          #ltcConfTable
+              ENDPROPERTIES
+              
+              CONTAINER
+                CONTROL TABPAGE
+                  PROPERTIES
+                    Name                #TabHeaderOverview
+                    Caption             #@SYS9039
+                    DataSource          #ltcConfTable
+                  ENDPROPERTIES
+                  
+                  CONTAINER
+                    CONTROL GRID
+                      PROPERTIES
+                        Name                #Grid
+                        Width               #Column width
+                        Height              #Column height
+                        DataSource          #ltcConfTable
+                      ENDPROPERTIES
+                      
+                        CONTAINER
+                          CONTROL STRINGEDIT
+                            PROPERTIES
+                              Name                #ltcConfTable_ConfId
+                              LabelAlignment      #Right
+                              DataSource          #ltcConfTable
+                              DataField           #ConfId
+                            ENDPROPERTIES
+                            
+                          ENDCONTROL 
+                          
+                          CONTROL STRINGEDIT
+                            PROPERTIES
+                              Name                #ltcConfTable_ConfName
+                              LabelAlignment      #Right
+                              DataSource          #ltcConfTable
+                              DataField           #ConfName
+                            ENDPROPERTIES
+                            
+                          ENDCONTROL 
+                          
+                          CONTROL STRINGEDIT
+                            PROPERTIES
+                              Name                #refTableName
+                              LabelAlignment      #Right
+                              DataSource          #ltcConfTable
+                              DataMethod          #reftableName
+                            ENDPROPERTIES
+                            
+                            METHODS
+                              Version: 3
+                              SOURCE #lookup
+                                #void lookup()
+                                #{
+                                #    TableId refTableId = pickTable(/*false,false,false,false,false,tableid2name(ltcConfTable.refTableId)*/);
+                                #    ;
+                                #    if (refTableId)
+                                #    {
+                                #        ltcConfTable.refTableId = refTableId;
+                                #        ltcConfTable_ds.refresh();
+                                #    }
+                                #}
+                              ENDSOURCE
+                            ENDMETHODS
+                          ENDCONTROL 
+                          
+                        ENDCONTAINER
+                        
+                    ENDCONTROL 
+                    
+                  ENDCONTAINER
+                  
+                ENDCONTROL 
+                
+              ENDCONTAINER
+              
+            ENDCONTROL 
+            
+          ENDCONTAINER
+          
+      ENDCONTROL 
+      
+      CONTROL GROUP
+        PROPERTIES
+          Name                #CtrlSplitHori
+          AutoDeclaration     #Yes
+          Width               #Column width
+          Height              #5
+          AlignControl        #Yes
+          FrameType           #Raised 3D
+          BackgroundColor     #Window background
+          HideIfEmpty         #No
+          AlignChild          #No
+        ENDPROPERTIES
+        
+        METHODS
+          Version: 3
+          SOURCE #mouseUp
+            #int mouseUp(int _x, int _y, int _button, Boolean _Ctrl, Boolean _Shift)
+            #{
+            #    int ret;
+            #
+            #    ret = super(_x, _y, _button, _Ctrl, _Shift);
+            #
+            #    Return formSplitterVertical.mouseUp(_x, _y, _button, _Ctrl, _Shift);
+            #}
+          ENDSOURCE
+          SOURCE #mouseMove
+            #int mouseMove(int _x, int _y, int _button, Boolean _Ctrl, Boolean _Shift)
+            #{
+            #    int ret;
+            #
+            #    ret = super(_x, _y, _button, _Ctrl, _Shift);
+            #
+            #    Return formSplitterVertical.mouseMove(_x,_y,_button,_ctrl,_shift);
+            #}
+          ENDSOURCE
+          SOURCE #mouseDown
+            #int mouseDown(int _x, int _y, int _button, Boolean _Ctrl, Boolean _Shift)
+            #{
+            #    int ret;
+            #
+            #    ret = super(_x, _y, _button, _Ctrl, _Shift);
+            #
+            #    Return formSplitterVertical.mouseDown(_x, _y, _button, _Ctrl, _Shift);
+            #}
+          ENDSOURCE
+        ENDMETHODS
+          CONTAINER
+          ENDCONTAINER
+          
+      ENDCONTROL 
+      
+      CONTROL GROUP
+        PROPERTIES
+          Name                #Line
+          Width               #Column width
+          Height              #Column height
+          FrameType           #None
+        ENDPROPERTIES
+        
+          CONTAINER
+            CONTROL TAB
+              PROPERTIES
+                Name                #TabLine
+                Width               #Column width
+                Height              #Column height
+                DataSource          #ltcConfLine
+              ENDPROPERTIES
+              
+              CONTAINER
+                CONTROL TABPAGE
+                  PROPERTIES
+                    Name                #TabLineOverview
+                    Caption             #@SYS9039
+                    DataSource          #ltcConfLine
+                  ENDPROPERTIES
+                  
+                  CONTAINER
+                    CONTROL GRID
+                      PROPERTIES
+                        Name                #LineSpec
+                        Width               #Column width
+                        Height              #Column height
+                        DataSource          #ltcConfLine
+                      ENDPROPERTIES
+                      
+                        CONTAINER
+                          CONTROL INTEDIT
+                            PROPERTIES
+                              Name                #ltcConfLine_TreeLevel
+                              LabelAlignment      #Right
+                              DataSource          #ltcConfLine
+                              DataField           #TreeLevel
+                            ENDPROPERTIES
+                            
+                          ENDCONTROL 
+                          
+                          CONTROL STRINGEDIT
+                            PROPERTIES
+                              Name                #tableName
+                              Visible             #No
+                              LabelAlignment      #Right
+                              DataSource          #ltcConfLine
+                              DataMethod          #reftableName
+                            ENDPROPERTIES
+                            
+                            METHODS
+                              Version: 3
+                              SOURCE #lookup
+                                #void lookup()
+                                #{
+                                #    TableId refTableId = pickTable();
+                                #    ;
+                                #    if (refTableId)
+                                #    {
+                                #        ltcConfLine.refTableId = refTableId;
+                                #        ltcConfLine_ds.refresh();
+                                #    }
+                                #}
+                              ENDSOURCE
+                            ENDMETHODS
+                          ENDCONTROL 
+                          
+                          CONTROL STRINGEDIT
+                            PROPERTIES
+                              Name                #fieldName
+                              LabelAlignment      #Right
+                              DataSource          #ltcConfLine
+                              DataMethod          #fieldName
+                            ENDPROPERTIES
+                            
+                            METHODS
+                              Version: 3
+                              SOURCE #lookup
+                                #void lookup()
+                                #{
+                                #    //fieldId fieldId = pickField(ltcConfLine.RefTableId);
+                                #    fieldId fieldId = pickField(ltcConfLine.RefTableId, int2str(ltcConfLine.FieldId)); //Используется усовершенствованный PickList :-)
+                                #    ;
+                                #    if (fieldId)
+                                #    {
+                                #        ltcConfLine.FieldId = fieldId;
+                                #        ltcConfLine_ds.refresh();
+                                #    }
+                                #}
+                              ENDSOURCE
+                            ENDMETHODS
+                          ENDCONTROL 
+                          
+                        ENDCONTAINER
+                        
+                    ENDCONTROL 
+                    
+                  ENDCONTAINER
+                  
+                ENDCONTROL 
+                
+              ENDCONTAINER
+              
+            ENDCONTROL 
+            
+          ENDCONTAINER
+          
+      ENDCONTROL 
+      
+    ENDCONTAINER
+    
+  ENDDESIGN
+  
+ENDFORM
+
+
+***Element: FRM
+
+; Microsoft Dynamics AX Forms unloaded
+; --------------------------------------------------------------------------------
+FRMVERSION 5
+
+FORM #ltcFormSetup
+  PROPERTIES
+    Name                #ltcFormSetup
+  ENDPROPERTIES
+  
+  METHODS
+    Version: 3
+    SOURCE #classDeclaration
+      #public class FormRun extends ObjectRun
+      #{
+      #}
+    ENDSOURCE
+  ENDMETHODS
+  OBJECTBANK
+    PROPERTIES
+    ENDPROPERTIES
+    
+    DATASOURCE
+      OBJECTPOOL
+        PROPERTIES
+          Name                #ltcFormSetup
+          Table               #ltcFormSetup
+          Index               #MainIdx
+        ENDPROPERTIES
+        
+        FIELDLIST
+        ENDFIELDLIST
+      ENDOBJECTPOOL
+    ENDDATASOURCE
+  ENDOBJECTBANK
+  
+  JOINS
+  ENDJOINS
+  
+  DESIGN
+    PROPERTIES
+      Width               #Column width
+      Height              #Column height
+      Caption             #Настройка дерева на форме
+      WindowType          #Workspace
+      SaveSize            #Yes
+    ENDPROPERTIES
+    
+    CONTAINER
+      CONTROL GRID
+        PROPERTIES
+          Name                #Grid
+          Width               #Column width
+          Height              #Column height
+          DataSource          #ltcFormSetup
+        ENDPROPERTIES
+        
+          CONTAINER
+            CONTROL STRINGEDIT
+              PROPERTIES
+                Name                #ltcFormSetup_FormName
+                LabelAlignment      #Right
+                DataSource          #ltcFormSetup
+                DataField           #FormName
+              ENDPROPERTIES
+              
+            ENDCONTROL 
+            
+            CONTROL STRINGEDIT
+              PROPERTIES
+                Name                #ltcFormSetup_FormControlName
+                LabelAlignment      #Right
+                DataSource          #ltcFormSetup
+                DataField           #FormControlName
+              ENDPROPERTIES
+              
+            ENDCONTROL 
+            
+            CONTROL STRINGEDIT
+              PROPERTIES
+                Name                #ltcFormSetup_ltcTreeClassName
+                LabelAlignment      #Right
+                DataSource          #ltcFormSetup
+                DataField           #ltcTreeClassName
+              ENDPROPERTIES
+              
+            ENDCONTROL 
+            
+            CONTROL STRINGEDIT
+              PROPERTIES
+                Name                #ltcFormSetup_ltcFormDataSourceName
+                LabelAlignment      #Right
+                DataSource          #ltcFormSetup
+                DataField           #ltcFormDataSourceName
+              ENDPROPERTIES
+              
+            ENDCONTROL 
+            
+          ENDCONTAINER
+          
+      ENDCONTROL 
+      
+    ENDCONTAINER
+    
+  ENDDESIGN
+  
+ENDFORM
+
+
+***Element: FRM
+
+; Microsoft Dynamics AX Forms unloaded
+; --------------------------------------------------------------------------------
+FRMVERSION 5
+
+FORM #ltcAvailableTreeClasses
+  PROPERTIES
+    Name                #ltcAvailableTreeClasses
+  ENDPROPERTIES
+  
+  METHODS
+    Version: 3
+    SOURCE #classDeclaration
+      #public class FormRun extends ObjectRun
+      #{
+      #}
+    ENDSOURCE
+  ENDMETHODS
+  OBJECTBANK
+    PROPERTIES
+    ENDPROPERTIES
+    
+    DATASOURCE
+      OBJECTPOOL
+        PROPERTIES
+          Name                #ltcAvailableTreeClasses
+          Table               #ltcAvailableTreeClasses
+          Index               #MainIdx
+          AllowCreate         #No
+        ENDPROPERTIES
+        
+        FIELDLIST
+        ENDFIELDLIST
+      ENDOBJECTPOOL
+    ENDDATASOURCE
+  ENDOBJECTBANK
+  
+  JOINS
+  ENDJOINS
+  
+  DESIGN
+    PROPERTIES
+      Width               #Column width
+      Height              #Column height
+      Caption             #Классы деревьев
+      WindowType          #Workspace
+      SaveSize            #Yes
+    ENDPROPERTIES
+    
+    CONTAINER
+      CONTROL GRID
+        PROPERTIES
+          Name                #Grid
+          Width               #Column width
+          Height              #Column height
+          DataSource          #ltcAvailableTreeClasses
+        ENDPROPERTIES
+        
+          CONTAINER
+            CONTROL STRINGEDIT
+              PROPERTIES
+                Name                #ltcAvailableTreeClasses_ClassName
+                LabelAlignment      #Right
+                DataSource          #ltcAvailableTreeClasses
+                DataField           #ClassName
+              ENDPROPERTIES
+              
+            ENDCONTROL 
+            
+            CONTROL STRINGEDIT
+              PROPERTIES
+                Name                #ltcAvailableTreeClasses_Description
+                LabelAlignment      #Right
+                DataSource          #ltcAvailableTreeClasses
+                DataField           #Description
+              ENDPROPERTIES
+              
+            ENDCONTROL 
+            
+            CONTROL CHECKBOX
+              PROPERTIES
+                Name                #ltcAvailableTreeClasses_IsConfigurable
+                BackgroundColor     #Window background
+                LabelAlignment      #Right
+                DataSource          #ltcAvailableTreeClasses
+                DataField           #IsConfigurable
+              ENDPROPERTIES
+              
+            ENDCONTROL 
+            
+          ENDCONTAINER
+          
+      ENDCONTROL 
+      
+      CONTROL BUTTONGROUP
+        PROPERTIES
+          Name                #ButtonGroup
+        ENDPROPERTIES
+        
+        CONTAINER
+          CONTROL BUTTON
+            PROPERTIES
+              Name                #Button
+              HelpText            #Обновить справочник доступных классов деревьев
+              Text                #Обновить
+            ENDPROPERTIES
+            
+            METHODS
+              Version: 3
+              SOURCE #clicked
+                #void clicked()
+                #{
+                #    super();
+                #    ltcAvailableTreeClasses::fillTable();
+                #    ltcAvailableTreeClasses_ds.research();
+                #}
+              ENDSOURCE
+            ENDMETHODS
+          ENDCONTROL 
+          
+        ENDCONTAINER
+        
+      ENDCONTROL 
+      
+    ENDCONTAINER
+    
+  ENDDESIGN
+  
+ENDFORM
+
+
+***Element: MNU
+
+; Microsoft Dynamics AX Menu : LTC unloaded
+; --------------------------------------------------------------------------------
+  MNUVERSION 4
+  
+  MENU #LTC
+    PROPERTIES
+      Name                #LTC
+      Label               #Настройка дерева
+      HelpText            #Настройка древовидного классификатора
+      SetCompany          #Yes
+    ENDPROPERTIES
+    
+    MENUITEM
+      PROPERTIES
+        Name                #Классы деревьев
+        MenuItemName        #ltcAvailableTreeClasses
+      ENDPROPERTIES
+      
+    ENDMENUITEM
+    MENUITEM
+      PROPERTIES
+        Name                #Конфигурации дерева
+        MenuItemName        #ltcConfTable
+      ENDPROPERTIES
+      
+    ENDMENUITEM
+    MENUITEM
+      PROPERTIES
+        Name                #Настройка дерева на форме
+        MenuItemName        #ltcFormSetup
+      ENDPROPERTIES
+      
+    ENDMENUITEM
+  ENDMENU
+  
+
+***Element: FTM
+
+; Microsoft Dynamics AX MENUITEM : ltcConfTable unloaded
+; --------------------------------------------------------------------------------
+  VERSION 1
+  
+  MENUITEM #ltcConfTable
+    Type: 1
+    PROPERTIES
+      Name                #ltcConfTable
+      Label               #Конфигурации дерева
+      HelpText            #Настройка фиксированного классификатора
+      Object              #ltcConfTable
+    ENDPROPERTIES
+    
+  ENDMENUITEM
+  
+
+***Element: FTM
+
+; Microsoft Dynamics AX MENUITEM : ltcFormSetup unloaded
+; --------------------------------------------------------------------------------
+  VERSION 1
+  
+  MENUITEM #ltcFormSetup
+    Type: 1
+    PROPERTIES
+      Name                #ltcFormSetup
+      Label               #Настройка дерева на форме
+      HelpText            #Создание или обновление справочника для настройки дерева на форме
+      Object              #ltcFormSetup
+      NeededAccessLevel   #Delete
+    ENDPROPERTIES
+    
+  ENDMENUITEM
+  
+
+***Element: FTM
+
+; Microsoft Dynamics AX MENUITEM : ltcAvailableTreeClasses unloaded
+; --------------------------------------------------------------------------------
+  VERSION 1
+  
+  MENUITEM #ltcAvailableTreeClasses
+    Type: 1
+    PROPERTIES
+      Name                #ltcAvailableTreeClasses
+      Label               #Классы деревьев
+      HelpText            #Справочник доступных классов деревьев
+      Object              #ltcAvailableTreeClasses
+      NeededAccessLevel   #Delete
+    ENDPROPERTIES
+    
+  ENDMENUITEM
+  
+
+***Element: PRN
+
+; Microsoft Dynamics AX Project : Sys_LiteTreeClassifierwoSSFR unloaded
+; --------------------------------------------------------------------------------
+  PROJECTVERSION 2
+  
+  PROJECT #Sys_LiteTreeClassifierwoSSFR
+   SHARED
+  PROPERTIES
+    Name                #Sys_LiteTreeClassifierwoSSFR
+  ENDPROPERTIES
+  
+    PROJECTCLASS ProjectNode
+    GROUP #DataDictionary
+      PROPERTIES
+        Name                #DataDictionary
+        ProjectGroupType    #DataDictionary
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #Tables
+        PROPERTIES
+          Name                #Tables
+          ProjectGroupType    #Tables
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        BEGINNODE
+          FILETYPE 0
+          UTILTYPE 44
+          UTILOBJECTID 50297
+          NODETYPE 204
+          NAME #ltcFormDatasource
+        ENDNODE
+        BEGINNODE
+          FILETYPE 0
+          UTILTYPE 44
+          UTILOBJECTID 50260
+          NODETYPE 204
+          NAME #ltcConfTable
+        ENDNODE
+        BEGINNODE
+          FILETYPE 0
+          UTILTYPE 44
+          UTILOBJECTID 50261
+          NODETYPE 204
+          NAME #ltcConfLine
+        ENDNODE
+        BEGINNODE
+          FILETYPE 0
+          UTILTYPE 44
+          UTILOBJECTID 50254
+          NODETYPE 204
+          NAME #ltcFormSetup
+        ENDNODE
+        BEGINNODE
+          FILETYPE 0
+          UTILTYPE 44
+          UTILOBJECTID 50255
+          NODETYPE 204
+          NAME #ltcAvailableTreeClasses
+        ENDNODE
+        BEGINNODE
+          FILETYPE 0
+          UTILTYPE 44
+          UTILOBJECTID 50296
+          NODETYPE 204
+          NAME #ltcTmpDoneNodeTable
+        ENDNODE
+        ENDGROUP
+        
+      GROUP #ExtendedDataTypes
+        PROPERTIES
+          Name                #ExtendedDataTypes
+          ProjectGroupType    #ExtendedDataTypes
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        BEGINNODE
+          FILETYPE 0
+          UTILTYPE 41
+          UTILOBJECTID 50417
+          NODETYPE 234
+          NAME #ltcFormDataSourceName
+        ENDNODE
+        BEGINNODE
+          FILETYPE 0
+          UTILTYPE 41
+          UTILOBJECTID 50416
+          NODETYPE 232
+          NAME #ltcTreeLevel
+        ENDNODE
+        BEGINNODE
+          FILETYPE 0
+          UTILTYPE 41
+          UTILOBJECTID 50359
+          NODETYPE 234
+          NAME #ltcTreeConfId
+        ENDNODE
+        BEGINNODE
+          FILETYPE 0
+          UTILTYPE 41
+          UTILOBJECTID 50358
+          NODETYPE 234
+          NAME #ltcTreeClassName
+        ENDNODE
+        BEGINNODE
+          FILETYPE 0
+          UTILTYPE 41
+          UTILOBJECTID 50415
+          NODETYPE 232
+          NAME #ltcNodeNum
+        ENDNODE
+        ENDGROUP
+        
+      ENDGROUP
+      
+    GROUP #Macros
+      PROPERTIES
+        Name                #Macros
+        ProjectGroupType    #Macros
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      BEGINNODE
+        FILETYPE 0
+        UTILTYPE 4
+        UTILOBJECTID 0
+        NODETYPE 218
+        NAME #ltc
+      ENDNODE
+      ENDGROUP
+      
+    GROUP #Classes
+      PROPERTIES
+        Name                #Classes
+        ProjectGroupType    #Classes
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      BEGINNODE
+        FILETYPE 0
+        UTILTYPE 45
+        UTILOBJECTID 50799
+        NODETYPE 329
+        NAME #ltcTreeCtrlHandler
+      ENDNODE
+      BEGINNODE
+        FILETYPE 0
+        UTILTYPE 45
+        UTILOBJECTID 50800
+        NODETYPE 329
+        NAME #ltcTreeCtrlHandler_FixedClassifier
+      ENDNODE
+      BEGINNODE
+        FILETYPE 0
+        UTILTYPE 45
+        UTILOBJECTID 50804
+        NODETYPE 329
+        NAME #ltcFormMethodHandler
+      ENDNODE
+      BEGINNODE
+        FILETYPE 0
+        UTILTYPE 45
+        UTILOBJECTID 51035
+        NODETYPE 329
+        NAME #ltcTreeItemData
+      ENDNODE
+      BEGINNODE
+        FILETYPE 0
+        UTILTYPE 45
+        UTILOBJECTID 51034
+        NODETYPE 329
+        NAME #ltcDoneTreeNodes
+      ENDNODE
+      BEGINNODE
+        FILETYPE 0
+        UTILTYPE 45
+        UTILOBJECTID 51036
+        NODETYPE 329
+        NAME #ImageListAppl_ltcTree
+      ENDNODE
+      ENDGROUP
+      
+    GROUP #Forms
+      PROPERTIES
+        Name                #Forms
+        ProjectGroupType    #Forms
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      BEGINNODE
+        FILETYPE 0
+        UTILTYPE 11
+        UTILOBJECTID 0
+        NODETYPE 201
+        NAME #ltcConfTable
+      ENDNODE
+      BEGINNODE
+        FILETYPE 0
+        UTILTYPE 11
+        UTILOBJECTID 0
+        NODETYPE 201
+        NAME #ltcFormSetup
+      ENDNODE
+      BEGINNODE
+        FILETYPE 0
+        UTILTYPE 11
+        UTILOBJECTID 0
+        NODETYPE 201
+        NAME #ltcAvailableTreeClasses
+      ENDNODE
+      ENDGROUP
+      
+    GROUP #Menues
+      PROPERTIES
+        Name                #Menues
+        ProjectGroupType    #
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      BEGINNODE
+        FILETYPE 0
+        UTILTYPE 16
+        UTILOBJECTID 0
+        NODETYPE 205
+        NAME #LTC
+      ENDNODE
+      ENDGROUP
+      
+    GROUP #MenuItems
+      PROPERTIES
+        Name                #MenuItems
+        ProjectGroupType    #MenuItems
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #Display
+        PROPERTIES
+          Name                #Display
+          ProjectGroupType    #Display
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        BEGINNODE
+          FILETYPE 0
+          UTILTYPE 1
+          UTILOBJECTID 0
+          NODETYPE 296
+          NAME #ltcConfTable
+        ENDNODE
+        BEGINNODE
+          FILETYPE 0
+          UTILTYPE 1
+          UTILOBJECTID 0
+          NODETYPE 296
+          NAME #ltcFormSetup
+        ENDNODE
+        BEGINNODE
+          FILETYPE 0
+          UTILTYPE 1
+          UTILOBJECTID 0
+          NODETYPE 296
+          NAME #ltcAvailableTreeClasses
+        ENDNODE
+        ENDGROUP
+        
+      ENDGROUP
+      
+  ENDPROJECT
+  
+
+***Element: END
