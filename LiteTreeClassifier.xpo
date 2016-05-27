@@ -8,14 +8,12 @@ Formatversion: 1
   TABLEVERSION 1
   
   TABLE #ltcFormDatasource
-    Id 50297
     PROPERTIES
       Name                #ltcFormDatasource
     ENDPROPERTIES
     
     FIELDS
       FIELD #FormName
-        Id 50001
         STRING
         PROPERTIES
           Name                #FormName
@@ -29,7 +27,6 @@ Formatversion: 1
         ENDPROPERTIES
         
       FIELD #DataSourceName
-        Id 50002
         STRING
         PROPERTIES
           Name                #DataSourceName
@@ -43,7 +40,6 @@ Formatversion: 1
         ENDPROPERTIES
         
       FIELD #RefTableId
-        Id 50003
         INT
         PROPERTIES
           Name                #RefTableId
@@ -90,7 +86,6 @@ Formatversion: 1
   TABLEVERSION 1
   
   TABLE #ltcConfTable
-    Id 50260
     PROPERTIES
       Name                #ltcConfTable
       TableGroup          #Group
@@ -99,7 +94,6 @@ Formatversion: 1
     
     FIELDS
       FIELD #ConfId
-        Id 50001
         STRING
         PROPERTIES
           Name                #ConfId
@@ -112,7 +106,6 @@ Formatversion: 1
         ENDPROPERTIES
         
       FIELD #ConfName
-        Id 50002
         STRING
         PROPERTIES
           Name                #ConfName
@@ -126,7 +119,6 @@ Formatversion: 1
         ENDPROPERTIES
         
       FIELD #RefTableId
-        Id 50003
         INT
         PROPERTIES
           Name                #RefTableId
@@ -144,7 +136,6 @@ Formatversion: 1
     
     INDICES
       #MainIdx
-      Id 50001
       PROPERTIES
         Name                #MainIdx
         AllowDuplicates     #No
@@ -201,7 +192,6 @@ Formatversion: 1
   TABLEVERSION 1
   
   TABLE #ltcConfLine
-    Id 50261
     PROPERTIES
       Name                #ltcConfLine
       TableGroup          #Group
@@ -211,7 +201,6 @@ Formatversion: 1
     
     FIELDS
       FIELD #ConfId
-        Id 50001
         STRING
         PROPERTIES
           Name                #ConfId
@@ -224,7 +213,6 @@ Formatversion: 1
         ENDPROPERTIES
         
       FIELD #TreeLevel
-        Id 50002
         INT
         PROPERTIES
           Name                #TreeLevel
@@ -237,7 +225,6 @@ Formatversion: 1
         ENDPROPERTIES
         
       FIELD #RefTableId
-        Id 50003
         INT
         PROPERTIES
           Name                #RefTableId
@@ -250,7 +237,6 @@ Formatversion: 1
         ENDPROPERTIES
         
       FIELD #FieldId
-        Id 50004
         INT
         PROPERTIES
           Name                #FieldId
@@ -268,7 +254,6 @@ Formatversion: 1
     
     INDICES
       #LineIdx
-      Id 50001
       PROPERTIES
         Name                #LineIdx
         AllowDuplicates     #No
@@ -367,7 +352,6 @@ Formatversion: 1
   TABLEVERSION 1
   
   TABLE #ltcFormSetup
-    Id 50254
     PROPERTIES
       Name                #ltcFormSetup
       TableGroup          #Group
@@ -376,7 +360,6 @@ Formatversion: 1
     
     FIELDS
       FIELD #FormName
-        Id 50001
         STRING
         PROPERTIES
           Name                #FormName
@@ -392,7 +375,6 @@ Formatversion: 1
         ENDPROPERTIES
         
       FIELD #FormControlName
-        Id 50002
         STRING
         PROPERTIES
           Name                #FormControlName
@@ -407,7 +389,6 @@ Formatversion: 1
         ENDPROPERTIES
         
       FIELD #ltcTreeClassName
-        Id 50003
         STRING
         PROPERTIES
           Name                #ltcTreeClassName
@@ -421,7 +402,6 @@ Formatversion: 1
         ENDPROPERTIES
         
       FIELD #ltcFormDataSourceName
-        Id 50004
         STRING
         PROPERTIES
           Name                #ltcFormDataSourceName
@@ -440,7 +420,6 @@ Formatversion: 1
     
     INDICES
       #MainIdx
-      Id 50001
       PROPERTIES
         Name                #MainIdx
         AllowDuplicates     #No
@@ -485,7 +464,6 @@ Formatversion: 1
   TABLEVERSION 1
   
   TABLE #ltcAvailableTreeClasses
-    Id 50255
     PROPERTIES
       Name                #ltcAvailableTreeClasses
       TableGroup          #Group
@@ -494,7 +472,6 @@ Formatversion: 1
     
     FIELDS
       FIELD #ClassName
-        Id 50001
         STRING
         PROPERTIES
           Name                #ClassName
@@ -510,7 +487,6 @@ Formatversion: 1
         ENDPROPERTIES
         
       FIELD #Description
-        Id 50002
         STRING
         PROPERTIES
           Name                #Description
@@ -525,7 +501,6 @@ Formatversion: 1
         ENDPROPERTIES
         
       FIELD #IsConfigurable
-        Id 50004
         ENUM
         PROPERTIES
           Name                #IsConfigurable
@@ -552,7 +527,6 @@ Formatversion: 1
     
     INDICES
       #MainIdx
-      Id 50001
       PROPERTIES
         Name                #MainIdx
         AllowDuplicates     #No
@@ -654,7 +628,6 @@ Formatversion: 1
   TABLEVERSION 1
   
   TABLE #ltcTmpDoneNodeTable
-    Id 50296
     PROPERTIES
       Name                #ltcTmpDoneNodeTable
       Label               #Развернутые узлы
@@ -664,7 +637,6 @@ Formatversion: 1
     
     FIELDS
       FIELD #NodeNum
-        Id 50001
         INT
         PROPERTIES
           Name                #NodeNum
@@ -677,7 +649,6 @@ Formatversion: 1
         ENDPROPERTIES
         
       FIELD #ParentNodeNum
-        Id 50002
         INT
         PROPERTIES
           Name                #ParentNodeNum
@@ -690,7 +661,6 @@ Formatversion: 1
         ENDPROPERTIES
         
       FIELD #TableNum
-        Id 50003
         INT
         PROPERTIES
           Name                #TableNum
@@ -705,7 +675,6 @@ Formatversion: 1
     
     INDICES
       #MainIdx
-      Id 50001
       PROPERTIES
         Name                #MainIdx
         AllowDuplicates     #No
@@ -763,7 +732,6 @@ Formatversion: 1
   USERTYPEVERSION 6
   
   USERTYPE #ltcFormDataSourceName
-  Id 50417
   STRING
     PROPERTIES
       Name                #ltcFormDataSourceName
@@ -789,7 +757,6 @@ Formatversion: 1
   USERTYPEVERSION 6
   
   USERTYPE #ltcTreeLevel
-  Id 50416
   INT
     PROPERTIES
       Name                #ltcTreeLevel
@@ -813,7 +780,6 @@ Formatversion: 1
   USERTYPEVERSION 6
   
   USERTYPE #ltcTreeConfId
-  Id 50359
   STRING
     PROPERTIES
       Name                #ltcTreeConfId
@@ -837,7 +803,6 @@ Formatversion: 1
   USERTYPEVERSION 6
   
   USERTYPE #ltcTreeClassName
-  Id 50358
   STRING
     PROPERTIES
       Name                #ltcTreeClassName
@@ -867,7 +832,6 @@ Formatversion: 1
   USERTYPEVERSION 6
   
   USERTYPE #ltcNodeNum
-  Id 50415
   INT
     PROPERTIES
       Name                #ltcNodeNum
@@ -905,7 +869,6 @@ Formatversion: 1
   CLSVERSION 1
   
   CLASS #ltcTreeCtrlHandler
-    Id 50799
     PROPERTIES
       Name                #ltcTreeCtrlHandler
       Extends             #
@@ -1285,7 +1248,6 @@ Formatversion: 1
   CLSVERSION 1
   
   CLASS #ltcTreeCtrlHandler_FixedClassifier
-    Id 50800
     PROPERTIES
       Name                #ltcTreeCtrlHandler_FixedClassifier
       Extends             #ltcTreeCtrlHandler
@@ -1835,7 +1797,7 @@ Formatversion: 1
         #    qbds = query.addDataSource(resourceTableId);
         #    qbds.orderMode(OrderMode::GroupBy);
         #
-        #    //UVI в запросе создаём такой же диналинк, как и в исходном источнике данных, чтобы можно было использовать дерево на подчинённых формах, например на строках документов
+        #    //в запросе создаём такой же диналинк, как и в исходном источнике данных, чтобы можно было использовать дерево на подчинённых формах, например на строках документов
         #    sourceQBDS = formDataSource.query().dataSourceTable(resourceTableId);
         #    dinaLinkCount = sourceQBDS.dynalinkCount();
         #    for (i=1; i<=dinaLinkCount; i++) {
@@ -1910,7 +1872,6 @@ Formatversion: 1
   CLSVERSION 1
   
   CLASS #ltcFormMethodHandler
-    Id 50804
     PROPERTIES
       Name                #ltcFormMethodHandler
       Extends             #
@@ -2056,7 +2017,7 @@ Formatversion: 1
         #        treeCtrl.width(spliterPos);
         #        treeDataSource = ltcTreeCtrlHandler::construct(ltcFormSetup.ltcTreeClassName,datasource, treeCtrl);
         #        treeDataSource.init(con);
-        #        treeCtrl.select(treeCtrl.getRoot());    //don, 25.03.2011, bugfix (не накладывался фильтр при первом клике по дереву)
+        #        treeCtrl.select(treeCtrl.getRoot());    //don, bugfix (не накладывался фильтр при первом клике по дереву)
         #    }
         #}
       ENDSOURCE
@@ -2281,7 +2242,6 @@ Formatversion: 1
   CLSVERSION 1
   
   CLASS #ltcTreeItemData
-    Id 51035
     PROPERTIES
       Name                #ltcTreeItemData
       Extends             #
@@ -2341,7 +2301,6 @@ Formatversion: 1
   CLSVERSION 1
   
   CLASS #ltcDoneTreeNodes
-    Id 51034
     PROPERTIES
       Name                #ltcDoneTreeNodes
       Extends             #
@@ -2415,7 +2374,6 @@ Formatversion: 1
   CLSVERSION 1
   
   CLASS #ImageListAppl_ltcTree
-    Id 51036
     PROPERTIES
       Name                #ImageListAppl_ltcTree
       Extends             #ImageListAppl
@@ -2457,7 +2415,7 @@ FORM #ltcConfTable
     SOURCE #classDeclaration
       #public class FormRun extends ObjectRun
       #{
-      #        SysFormSplitter_Y               formSplitterVertical;
+      #    SysFormSplitter_Y   formSplitterVertical;
       #}
     ENDSOURCE
     SOURCE #init
@@ -2593,7 +2551,7 @@ FORM #ltcConfTable
                               SOURCE #lookup
                                 #void lookup()
                                 #{
-                                #    TableId refTableId = pickTable(/*false,false,false,false,false,tableid2name(ltcConfTable.refTableId)*/);
+                                #    TableId refTableId = pickTable();
                                 #    ;
                                 #    if (refTableId)
                                 #    {
@@ -2756,8 +2714,7 @@ FORM #ltcConfTable
                               SOURCE #lookup
                                 #void lookup()
                                 #{
-                                #    //fieldId fieldId = pickField(ltcConfLine.RefTableId);
-                                #    fieldId fieldId = pickField(ltcConfLine.RefTableId, int2str(ltcConfLine.FieldId)); //Используется усовершенствованный PickList :-)
+                                #    fieldId fieldId = pickField(ltcConfLine.RefTableId);
                                 #    ;
                                 #    if (fieldId)
                                 #    {
